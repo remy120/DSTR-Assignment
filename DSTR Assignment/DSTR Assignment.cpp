@@ -58,14 +58,9 @@ void runAssignment()
 		cout << "2) Delete Last Last" << endl;
 		cout << "3) Delete Order by Index" << endl;
 		cout << "4) Delete Order by ID" << endl;
-		cout << "5) Sort by ID ascending" << endl;
-		cout << "6) Sort by ID descending" << endl;
-		cout << "7) Sort by Total ascending" << endl;
-		cout << "8) Sort by Total descending" << endl;
-		cout << "9) Sort by Order Date ascending" << endl;
-		cout << "10) Sort by Order Date descending" << endl;
-		cout << "11) Sort by Quantity ascending" << endl;
-		cout << "12) Sort by Quantity descending" << endl;
+		cout << "5) Sort by ID" << endl;
+		cout << "6) Sort by Total" << endl;
+		cout << "7) Sort by Order Date" << endl;
 
 		cout << "\nChoice? " << endl;
 		cin >> opt;

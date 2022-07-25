@@ -64,6 +64,8 @@ void runAssignment()
 		cout << "8) Sort by Total descending" << endl;
 		cout << "9) Sort by Order Date ascending" << endl;
 		cout << "10) Sort by Order Date descending" << endl;
+		cout << "11) Sort by Quantity ascending" << endl;
+		cout << "12) Sort by Quantity descending" << endl;
 
 		cout << "\nChoice? " << endl;
 		cin >> opt;
@@ -100,38 +102,84 @@ void runAssignment()
 		break;
 		case 5:
 		{
-			cout << "--- SORT ORDER SORT BY ID ASCENDING---" << endl;
-			order.sortIDAsc();
+			cout << "--- SORT ORDER BY ID ---" << endl;
+			cout << "1) Ascending" << endl;
+			cout << "2) Descending" << endl;
+			cin >> opt;
+			cout << endl;
+			switch (opt)
+			{
+				case 1:
+				{
+					cout << "--- SORT ORDER BY ID ASCENDING---" << endl;
+					order.sortIDAsc();
+				}
+				break;
+				case 2:
+				{
+					cout << "--- SORT ORDER BY ID DESCENDING---" << endl;
+					order.sortIDDesc();
+				}
+				break;
+				default:
+					cout << "LOG: Invalid option!" << endl;
+					break;
+			}
 		}
 		break;
 		case 6:
 		{
-			cout << "--- SORT ORDER BY ID DESCENDING---" << endl;
-			order.sortIDDesc();
+			cout << "--- SORT ORDER BY TOTAL ---" << endl;
+			cout << "1) Ascending" << endl;
+			cout << "2) Descending" << endl;
+			cin >> opt;
+			cout << endl;
+			switch (opt)
+			{
+			case 1:
+			{
+				cout << "--- SORT ORDER BY TOTAL ASCENDING---" << endl;
+				order.sortTotalAsc();
+			}
+			break;
+			case 2:
+			{
+				cout << "--- SORT ORDER BY TOTAL DESCENDING---" << endl;
+				order.sortTotalDesc();
+			}
+			break;
+			default:
+				cout << "LOG: Invalid option!" << endl;
+				break;
+			}
+			
 		}
 		break;
 		case 7:
 		{
-			cout << "--- SORT ORDER BY TOTAL ASCENDING---" << endl;
-			order.sortTotalAsc();
-		}
-		break;
-		case 8:
-		{
-			cout << "--- SORT ORDER BY TOTAL DESCENDING---" << endl;
-			order.sortTotalDesc();
-		}
-		break;
-		case 9:
-		{
-			cout << "--- SORT ORDER BY ORDER DATE DESCENDING---" << endl;
-			order.sortOrderDateAsc();
-		}
-		break;
-		case 10:
-		{
-			cout << "--- SORT ORDER BY ORDER DATE DESCENDING---" << endl;
-			order.sortOrderDateDesc();
+			cout << "--- SORT ORDER BY ORDER DATE ---" << endl;
+			cout << "1) Ascending" << endl;
+			cout << "2) Descending" << endl;
+			cin >> opt;
+			cout << endl;
+			switch (opt)
+			{
+			case 1:
+			{
+				cout << "--- SORT ORDER BY ORDER DATE ASCENDING---" << endl;
+				order.sortOrderDateAsc();
+			}
+			break;
+			case 2:
+			{
+				cout << "--- SORT ORDER BY ORDER DATE DESCENDING---" << endl;
+				order.sortOrderDateDesc();
+			}
+			break;
+			default:
+				cout << "LOG: Invalid option!" << endl;
+				break;
+			}
 		}
 		break;
 		default:

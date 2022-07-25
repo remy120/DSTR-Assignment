@@ -2,6 +2,7 @@
 #include <string>
 #include "OrderList_Linkedlist.h"
 #include "OrderList_Structure.h"
+#include "login.cpp"
 
 using namespace std;
 
@@ -61,6 +62,7 @@ void runAssignment()
 		cout << "5) Sort by ID" << endl;
 		cout << "6) Sort by Total" << endl;
 		cout << "7) Sort by Order Date" << endl;
+		cout << "8) Add hardcoded orders" << endl;
 
 		cout << "\nChoice? " << endl;
 		cin >> opt;
@@ -177,6 +179,14 @@ void runAssignment()
 			}
 		}
 		break;
+		case 8:
+		{
+			cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
+			hardCodedOrder hardOrder[8];
+			generateHardCodedOrder(hardOrder);
+			order.getOrdrFromArray(hardOrder);
+		}
+		break;
 		default:
 			cout << "LOG: Invalid option!" << endl;
 			break;
@@ -188,16 +198,23 @@ void runAssignment()
 		do {
 			cout << "Do you want to continue? (y/n)." << endl;
 			cin >> next;
+			if (next == 'n') {
+				cout << "\nLogging out...Thank you!" << endl;
+			}
 		} while (next != 'y' && next != 'n');
 
 	} while (next == 'y');
 
-
-	cout << endl;
 	cout << "============================================================" << endl;
 }
 
 int main()
 {
-	runAssignment();
+	user user[3];
+	userData(user);
+
+	if (validateUser(user) != -1) {
+		runAssignment();
+	}
+	
 }

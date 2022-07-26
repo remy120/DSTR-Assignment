@@ -9,6 +9,8 @@
 #include <iomanip>
 
 using namespace std;
+//using std::cout;
+//using std::cin;
 
 inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 	hardCodedOrder[0].horderID = 1;

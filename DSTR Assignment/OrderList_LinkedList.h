@@ -672,7 +672,117 @@ public:
 		}
 	}
 
+	//sort order based on quantity ascending
+	void sortQuantityAsc()
+	{
+		Order* curr = head, * index = nullptr;
+		int tempID, tempItem, tempQuantity;
+		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		double tempTotal;
 
+		if (head == nullptr) {
+			return;
+		}
+		else {
+			while (curr != nullptr)
+			{
+				index = curr->next;
+				while (index != nullptr)
+				{
+					if (curr->quantity > index->quantity)
+					{
+						tempID = curr->orderID;
+						tempName = curr->buyerName;
+						tempEmail = curr->buyerEmail;
+						tempDate = curr->orderDate;
+						tempTotal = curr->total;
+						tempShipping = curr->shippingAddss;
+						tempItem = curr->itemID;
+						tempQuantity = curr->quantity;
+						tempStatus = curr->status;
+
+						curr->orderID = index->orderID;
+						curr->buyerName = index->buyerName;
+						curr->buyerEmail = index->buyerEmail;
+						curr->orderDate = index->orderDate;
+						curr->total = index->total;
+						curr->shippingAddss = index->shippingAddss;
+						curr->itemID = index->itemID;
+						curr->quantity = index->quantity;
+						curr->status = index->status;
+
+						index->orderID = tempID;
+						index->buyerName = tempName;
+						index->buyerEmail = tempEmail;
+						index->orderDate = tempDate;
+						index->total = tempTotal;
+						index->shippingAddss = tempShipping;
+						index->itemID = tempItem;
+						index->quantity = tempQuantity;
+						index->status = tempStatus;
+					}
+					index = index->next;
+				}
+				curr = curr->next;
+			}
+		}
+	}
+
+	//sort order based on quantity descending
+	void sortQuantityDesc()
+	{
+		Order* curr = head, * index = nullptr;
+		int tempID, tempItem, tempQuantity;
+		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		double tempTotal;
+
+		if (head == nullptr) {
+			return;
+		}
+		else {
+			while (curr != nullptr)
+			{
+				index = curr->next;
+				while (index != nullptr)
+				{
+					if (curr->quantity < index->quantity)
+					{
+						tempID = curr->orderID;
+						tempName = curr->buyerName;
+						tempEmail = curr->buyerEmail;
+						tempDate = curr->orderDate;
+						tempTotal = curr->total;
+						tempShipping = curr->shippingAddss;
+						tempItem = curr->itemID;
+						tempQuantity = curr->quantity;
+						tempStatus = curr->status;
+
+						curr->orderID = index->orderID;
+						curr->buyerName = index->buyerName;
+						curr->buyerEmail = index->buyerEmail;
+						curr->orderDate = index->orderDate;
+						curr->total = index->total;
+						curr->shippingAddss = index->shippingAddss;
+						curr->itemID = index->itemID;
+						curr->quantity = index->quantity;
+						curr->status = index->status;
+
+						index->orderID = tempID;
+						index->buyerName = tempName;
+						index->buyerEmail = tempEmail;
+						index->orderDate = tempDate;
+						index->total = tempTotal;
+						index->shippingAddss = tempShipping;
+						index->itemID = tempItem;
+						index->quantity = tempQuantity;
+						index->status = tempStatus;
+					}
+					index = index->next;
+				}
+				curr = curr->next;
+			}
+		}
+	}
 
 };
 

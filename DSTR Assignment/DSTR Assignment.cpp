@@ -67,7 +67,8 @@ void runAssignment()
 		cout << "5) Sort by ID" << endl;
 		cout << "6) Sort by Total" << endl;
 		cout << "7) Sort by Order Date" << endl;
-		cout << "8) Add hardcoded orders" << endl;
+		cout << "8) Sort by Quantity" << endl;
+		cout << "9) Add hardcoded orders" << endl;
 
 		//check if input is integer
 		do {
@@ -132,8 +133,33 @@ void runAssignment()
 				cout << "--- SORT ORDER BY ID ---" << endl;
 				cout << "1) Ascending" << endl;
 				cout << "2) Descending" << endl;
-				cin >> opt;
-				cout << endl;
+
+				//check if input is integer
+				do {
+					cout << "\nChoice?" << endl;
+					cin >> checkint;
+					cout << endl;
+
+					for (i = 0; i < checkint.length(); i++)
+					{
+						if (isdigit(checkint[i]) == false)
+						{
+							count = 1;
+							break;
+						}
+						else
+							count = 0;
+					}
+
+					if (count == 0)
+					{
+						opt = stoi(checkint);
+					}
+					else
+						cout << "Invalid input!" << endl;
+
+				} while (count != 0);
+
 				switch (opt)
 				{
 					case 1:
@@ -159,8 +185,33 @@ void runAssignment()
 				cout << "--- SORT ORDER BY TOTAL ---" << endl;
 				cout << "1) Ascending" << endl;
 				cout << "2) Descending" << endl;
-				cin >> opt;
-				cout << endl;
+
+				//check if input is integer
+				do {
+					cout << "\nChoice?" << endl;
+					cin >> checkint;
+					cout << endl;
+
+					for (i = 0; i < checkint.length(); i++)
+					{
+						if (isdigit(checkint[i]) == false)
+						{
+							count = 1;
+							break;
+						}
+						else
+							count = 0;
+					}
+
+					if (count == 0)
+					{
+						opt = stoi(checkint);
+					}
+					else
+						cout << "Invalid input!" << endl;
+
+				} while (count != 0);
+
 				switch (opt)
 				{
 					case 1:
@@ -187,8 +238,33 @@ void runAssignment()
 				cout << "--- SORT ORDER BY ORDER DATE ---" << endl;
 				cout << "1) Ascending" << endl;
 				cout << "2) Descending" << endl;
-				cin >> opt;
-				cout << endl;
+
+				//check if input is integer
+				do {
+					cout << "\nChoice?" << endl;
+					cin >> checkint;
+					cout << endl;
+
+					for (i = 0; i < checkint.length(); i++)
+					{
+						if (isdigit(checkint[i]) == false)
+						{
+							count = 1;
+							break;
+						}
+						else
+							count = 0;
+					}
+
+					if (count == 0)
+					{
+						opt = stoi(checkint);
+					}
+					else
+						cout << "Invalid input!" << endl;
+
+				} while (count != 0);
+
 				switch (opt)
 				{
 					case 1:
@@ -210,6 +286,58 @@ void runAssignment()
 			}
 				break;
 			case 8:
+			{
+				cout << "--- SORT ORDER BY QUANTITY ---" << endl;
+				cout << "1) Ascending" << endl;
+				cout << "2) Descending" << endl;
+
+				//check if input is integer
+				do {
+					cout << "\nChoice?" << endl;
+					cin >> checkint;
+					cout << endl;
+
+					for (i = 0; i < checkint.length(); i++)
+					{
+						if (isdigit(checkint[i]) == false)
+						{
+							count = 1;
+							break;
+						}
+						else
+							count = 0;
+					}
+
+					if (count == 0)
+					{
+						opt = stoi(checkint);
+					}
+					else
+						cout << "Invalid input!" << endl;
+
+				} while (count != 0);
+
+				switch (opt)
+				{
+				case 1:
+				{
+					cout << "--- SORT ORDER BY QUANTITY ASCENDING---" << endl;
+					order.sortQuantityAsc();
+				}
+				break;
+				case 2:
+				{
+					cout << "--- SORT ORDER BY QUANTITY DESCENDING---" << endl;
+					order.sortQuantityDesc();
+				}
+				break;
+				default:
+					cout << "LOG: Invalid option!" << endl;
+					break;
+				}
+			}
+			break;
+			case 9:
 			{
 				cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
 				hardCodedOrder hardOrder[8];

@@ -24,10 +24,11 @@ void runPOSystem()
 		string checkint;
 
 		cout << "\n--- CHOICES OF FUNCTIONS ---" << endl;
-		cout << "1) Delete Order" << endl;
-		cout << "2) Sort Order" << endl;
-		cout << "3) Search Order" << endl;
-		cout << "66) Insert new order" << endl;
+		cout << "1) Insert new order" << endl;
+		cout << "2) Search Order" << endl;
+		cout << "3) Sort Order" << endl;
+		cout << "4) Delete Order" << endl;
+
 		cout << "77) Add hardcoded orders" << endl;
 		cout << "88) Show current orders" << endl;
 		cout << "99) Logout and Exit" << endl;
@@ -61,6 +62,81 @@ void runPOSystem()
 		switch (opt)
 		{
 			case 1:
+			{
+				order.insertNewOrder();
+			}
+			break;
+			case 2:
+			{
+				int searchopt = -1;
+				cout << "1) Search order by id" << endl;
+				cout << "2) Search order by position in linked list" << endl;
+
+				cout << "\nChoice? ";
+				cin >> searchopt;
+				switch (searchopt)
+				{
+				case 1:
+				{
+					int oid;
+					cout << "--- SEARCH ORDER BY ID ---" << endl;
+					cout << "OrderID: ";
+					cin >> oid;
+					order.searchOrderID(oid);
+				}
+				break;
+				case 2:
+				{
+					int pos;
+					cout << "--- SEARCH ORDER BY POSITION ---" << endl;
+					cout << "Position: ";
+					cin >> pos;
+					order.showSpecific(pos);
+				}
+				break;
+				default:
+				{
+					cout << "Invalid option!" << endl;
+				}
+				break;
+				}
+			}
+			break;
+			case 3:
+			{
+				int sortopt = -1;
+				cout << "1) Sort by ID" << endl;
+				cout << "2) Sort by Total" << endl;
+				cout << "3) Sort by Order Date" << endl;
+
+				cout << "\nChoice? ";
+				cin >> sortopt;
+				switch (sortopt)
+				{
+				case 1:
+				{
+					order.sortByID();
+				}
+				break;
+				case 2:
+				{
+					order.sortByTotal();
+				}
+				break;
+				case 3:
+				{
+					order.sortByDate();
+				}
+				break;
+				default:
+				{
+					cout << "Invalid option!" << endl;
+				}
+				break;
+				}
+			}
+			break;
+			case 4:
 			{
 				int delopt = -1;
 				cout << "1) Delete First Order" << endl;
@@ -111,81 +187,6 @@ void runPOSystem()
 					break;
 				}
 				
-			}
-			break;
-			case 2:
-			{
-				int sortopt = -1;
-				cout << "1) Sort by ID" << endl;
-				cout << "2) Sort by Total" << endl;
-				cout << "3) Sort by Order Date" << endl;
-
-				cout << "\nChoice? ";
-				cin >> sortopt;
-				switch (sortopt)
-				{
-				case 1:
-				{
-					order.sortByID();
-				}
-				break;
-				case 2:
-				{
-					order.sortByTotal();
-				}
-				break;
-				case 3:
-				{
-					order.sortByDate();
-				}
-				break;
-				default:
-				{
-					cout << "Invalid option!" << endl;
-				}
-				break;
-				}
-			}
-			break;
-			case 3:
-			{
-				int searchopt = -1;
-				cout << "1) Search order by id" << endl;
-				cout << "2) Search order by position in linked list" << endl;
-
-				cout << "\nChoice? ";
-				cin >> searchopt;
-				switch (searchopt)
-				{
-				case 1:
-				{
-					int oid;
-					cout << "--- SEARCH ORDER BY ID ---" << endl;
-					cout << "OrderID: ";
-					cin >> oid;
-					order.searchOrderID(oid);
-				}
-				break;
-				case 2:
-				{
-					int pos;
-					cout << "--- SEARCH ORDER BY POSITION ---" << endl;
-					cout << "Position: ";
-					cin >> pos;
-					order.showSpecific(pos);
-				}
-				break;
-				default:
-				{
-					cout << "Invalid option!" << endl;
-				}
-				break;
-				}
-			}
-			break;
-			case 66:
-			{
-				order.insertNewOrder();
 			}
 			break;
 			case 77:

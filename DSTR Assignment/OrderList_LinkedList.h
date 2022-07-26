@@ -134,7 +134,6 @@ public:
 
 	OrderList()
 	{
-		cout << "--- Constructing the LinkedList object ---" << endl;
 		this->size = 0;
 		this->head = nullptr;
 	}
@@ -244,17 +243,17 @@ public:
 	}
 
 	//delete specific item based on index
-	void deleteItemAt(int index)
+	void deleteItemAt(int position)
 	{
-		if (index < size)
+		if (position < size)
 		{
 			cout << "--- DELETE ORDER BY INDEX ---" << endl;
-			if (index == 0)
+			if (position == 0)
 				deleteFirst();
 			else {
 				Order* prev = nullptr;
 				Order* toDelete = head;
-				for (int i = 0; i < index; ++i)
+				for (int i = 0; i < position; ++i)
 				{
 					prev = toDelete;
 					toDelete = toDelete->next;
@@ -262,10 +261,9 @@ public:
 				prev->next = toDelete->next;
 				delete toDelete;
 				size--;
-				cout << "LOG:  Order #" << index << " is deleted..." << endl;
+				cout << "Order at position #" << position << " is deleted..." << endl;
 			}
-
-		}//if
+		}
 	}
 
 	//remove specific order based on orderID
@@ -283,8 +281,23 @@ public:
 				else
 					deleteItemAt(index);
 			}
-		}//if
+		}
 	}
+
+	//search for order based on ID
+	void searchOrderID(int id)
+	{
+		Order* current = head;
+		int position = -1;
+		while (current != nullptr)
+		{
+			++position;
+			if (current->orderID == id)
+				showSpecific(position);
+			current = current->next;
+		}
+	}
+
 
 	//get linkedlist size
 	int getSize()
@@ -307,6 +320,149 @@ public:
 		{
 			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
 			curr = curr->next;
+		}
+	}
+
+	//insert new order
+	void insertNewOrder()
+	{
+		int n = 0;
+		//asking for number of orders will be inserted at once
+		cout << "How many orders? " << endl;
+		cin >> n;
+		cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+
+		for (int i = 0; i < n; ++i)
+		{
+			string oID, name, email, date, total, shipping, item, quantity;
+			cout << "\n--- ENTER ORDER ID #" << (i + 1) << "---" << endl << endl;
+			cout << "Order ID= ";
+			getline(cin, oID);
+			cout << "Buyer Name= ";
+			getline(cin, name);
+			cout << "Buyer Email= ";
+			getline(cin, email);
+			cout << "Order Date (eg. 2022/05/20)= ";
+			getline(cin, date);
+			cout << "Total= RM";
+			getline(cin, total);
+			cout << "Shipping Address= ";
+			getline(cin, shipping);
+			cout << "Item ID= ";
+			getline(cin, item);
+			cout << "Quantity= ";
+			getline(cin, quantity);
+
+			insertNew(stoi(oID), name, email, date, stod(total), shipping, stoi(item), stoi(quantity));
+		}
+		showAll();
+	}
+
+	//show linkedlist
+	void showSpecific(int index)
+	{
+		Order* curr = head;
+		cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+		if (index < size)
+		{
+			for (int i = 0; i < index; ++i)
+			{
+				curr = curr->next;
+			}
+			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+		}
+	}
+
+	//sort by ID
+	void sortByID()
+	{
+		int sortIDopt = -1;
+		cout << "--- SORT ORDER BY ID ---" << endl;
+		cout << "1) Ascending" << endl;
+		cout << "2) Descending" << endl;
+		cin >> sortIDopt;
+		cout << endl;
+		switch (sortIDopt)
+		{
+		case 1:
+		{
+			cout << "--- SORT ORDER BY ID ASCENDING---" << endl;
+			sortIDAsc();
+			showAll();
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT ORDER BY ID DESCENDING---" << endl;
+			sortIDDesc();
+			showAll();
+		}
+		break;
+		default:
+			cout << "Invalid option!" << endl;
+			break;
+		}
+	}
+
+	//sort by total
+	void sortByTotal()
+	{
+		int sortTotalopt = -1;
+		cout << "--- SORT ORDER BY TOTAL ---" << endl;
+		cout << "1) Ascending" << endl;
+		cout << "2) Descending" << endl;
+		cin >> sortTotalopt;
+		cout << endl;
+		switch (sortTotalopt)
+		{
+		case 1:
+		{
+			cout << "--- SORT ORDER BY TOTAL ASCENDING---" << endl;
+			sortTotalAsc();
+			showAll();
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT ORDER BY TOTAL DESCENDING---" << endl;
+			sortTotalDesc();
+			showAll();
+		}
+		break;
+		default:
+			cout << "Invalid option!" << endl;
+			break;
+		}
+	}
+
+	//sort by date
+	void sortByDate()
+	{
+		int sortDateopt = -1;
+		cout << "--- SORT ORDER BY ORDER DATE ---" << endl;
+		cout << "1) Ascending" << endl;
+		cout << "2) Descending" << endl;
+		cin >> sortDateopt;
+		cout << endl;
+		switch (sortDateopt)
+		{
+		case 1:
+		{
+			cout << "--- SORT ORDER BY ORDER DATE ASCENDING---" << endl;
+			sortOrderDateAsc();
+			showAll();
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT ORDER BY ORDER DATE DESCENDING---" << endl;
+			sortOrderDateDesc();
+			showAll();
+		}
+		break;
+		default:
+			cout << "LOG: Invalid option!" << endl;
+			break;
 		}
 	}
 

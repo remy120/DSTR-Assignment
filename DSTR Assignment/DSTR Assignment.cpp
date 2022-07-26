@@ -8,70 +8,33 @@ using namespace std;
 using std::cout;
 using std::cin;
 
-void runAssignment()
+void runPOSystem()
 {
 	cout << endl;
 	cout << "--- Welcome to Purchasing Order System ---" << endl;
 
-	
-	
 	OrderList order;
-	int n = 0;
-	//asking for number of orders will be inserted at once
-	cout << "How many orders? " << endl;
-	cin >> n;
-	cin.ignore(numeric_limits <streamsize> ::max(), '\n');
 
-	for (int i = 0; i < n; ++i)
-	{
-		string oID, name, email, date, total, shipping, item, quantity;
-		cout << "\n--- ENTER ORDER ID #" << (i + 1) << "---" << endl << endl;
-		cout << "Order ID= ";
-		getline(cin, oID);
-		cout << "Buyer Name= ";
-		getline(cin, name);
-		cout << "Buyer Email= ";
-		getline(cin, email);
-		cout << "Order Date (eg. 2022/05/20)= ";
-		getline(cin, date);
-		cout << "Total= RM";
-		getline(cin, total);
-		cout << "Shipping Address= ";
-		getline(cin, shipping);
-		cout << "Item ID= ";
-		getline(cin, item);
-		cout << "Quantity= ";
-		getline(cin, quantity);
-
-		order.insertNew(stoi(oID), name, email, date, stod(total), shipping, stoi(item), stoi(quantity));
-	}
-
-	//show
-	//order.showAll();
 	cout << endl;
-	char next = 'n';
+	char next = 'y';
 
 	do {
-		//show
-		order.showAll();
-		cout << endl;
 		int opt = -1;
 		int i, count;
 		string checkint;
 
-		cout << "\n--- ORDER LISTS ---" << endl;
-		cout << "1) Delete First Order" << endl;
-		cout << "2) Delete Last Last" << endl;
-		cout << "3) Delete Order by Index" << endl;
-		cout << "4) Delete Order by ID" << endl;
-		cout << "5) Sort by ID" << endl;
-		cout << "6) Sort by Total" << endl;
-		cout << "7) Sort by Order Date" << endl;
-		cout << "8) Add hardcoded orders" << endl;
+		cout << "\n--- CHOICES OF FUNCTIONS ---" << endl;
+		cout << "1) Delete Order" << endl;
+		cout << "2) Sort Order" << endl;
+		cout << "3) Search Order" << endl;
+		cout << "66) Insert new order" << endl;
+		cout << "77) Add hardcoded orders" << endl;
+		cout << "88) Show current orders" << endl;
+		cout << "99) Logout and Exit" << endl;
 
 		//check if input is integer
 		do {
-			cout << "\nChoice?" << endl;
+			cout << "\nChoice? ";
 			cin >> checkint;
 			cout << endl;
 
@@ -95,148 +58,167 @@ void runAssignment()
 
 		} while (count !=0);
 
-
-
 		switch (opt)
 		{
 			case 1:
 			{
-				order.deleteFirst();
+				int delopt = -1;
+				cout << "1) Delete First Order" << endl;
+				cout << "2) Delete Last Order" << endl;
+				cout << "3) Delete Order by Position" << endl;
+				cout << "4) Delete Order by ID" << endl;
+
+				cout << "\nChoice? ";
+				cin >> delopt;
+				switch (delopt)
+				{
+					case 1:
+					{
+						order.deleteFirst();
+						order.showAll();
+					}
+					break;
+					case 2:
+					{
+						order.deleteLast();
+						order.showAll();
+					}
+					break;
+					case 3:
+					{
+						int i = -1;
+						cout << "Enter position: ";
+						cin >> i;
+						order.deleteItemAt(i);
+						order.showAll();
+					}
+					break;
+					case 4:
+					{
+						cout << "--- DELETE ORDER BY ID ---" << endl;
+						int uid = -1;
+						cout << "Enter Order ID: ";
+						cin >> uid;
+						order.remove(uid);
+						cout << "Order ID#" << uid << " is deleted..." << endl;
+						order.showAll();
+					}
+					break;
+					default:
+					{
+						cout << "Invalid option!" << endl;
+					}
+					break;
+				}
+				
 			}
-				break;
+			break;
 			case 2:
 			{
-				order.deleteLast();
-			}
+				int sortopt = -1;
+				cout << "1) Sort by ID" << endl;
+				cout << "2) Sort by Total" << endl;
+				cout << "3) Sort by Order Date" << endl;
+
+				cout << "\nChoice? ";
+				cin >> sortopt;
+				switch (sortopt)
+				{
+				case 1:
+				{
+					order.sortByID();
+				}
 				break;
+				case 2:
+				{
+					order.sortByTotal();
+				}
+				break;
+				case 3:
+				{
+					order.sortByDate();
+				}
+				break;
+				default:
+				{
+					cout << "Invalid option!" << endl;
+				}
+				break;
+				}
+			}
+			break;
 			case 3:
 			{
-				int i = -1;
-				cout << "Enter index? " << endl;
-				cin >> i;
-				order.deleteItemAt(i);
-			}
-				break;
-			case 4:
-			{
-				cout << "--- DELETE ORDER BY ID ---" << endl;
-				int uid = -1;
-				cout << "Enter Order ID? " << endl;
-				cin >> uid;
-				order.remove(uid);
-				cout << "LOG:  Order ID#" << uid << " is deleted..." << endl;
-			}
-				break;
-			case 5:
-			{
-				cout << "--- SORT ORDER BY ID ---" << endl;
-				cout << "1) Ascending" << endl;
-				cout << "2) Descending" << endl;
-				cin >> opt;
-				cout << endl;
-				switch (opt)
+				int searchopt = -1;
+				cout << "1) Search order by id" << endl;
+				cout << "2) Search order by position in linked list" << endl;
+
+				cout << "\nChoice? ";
+				cin >> searchopt;
+				switch (searchopt)
 				{
-					case 1:
-					{
-						cout << "--- SORT ORDER BY ID ASCENDING---" << endl;
-						order.sortIDAsc();
-					}
-						break;
-					case 2:
-					{
-						cout << "--- SORT ORDER BY ID DESCENDING---" << endl;
-						order.sortIDDesc();
-					}
-						break;
-					default:
-						cout << "LOG: Invalid option!" << endl;
-						break;
+				case 1:
+				{
+					int oid;
+					cout << "--- SEARCH ORDER BY ID ---" << endl;
+					cout << "OrderID: ";
+					cin >> oid;
+					order.searchOrderID(oid);
+				}
+				break;
+				case 2:
+				{
+					int pos;
+					cout << "--- SEARCH ORDER BY POSITION ---" << endl;
+					cout << "Position: ";
+					cin >> pos;
+					order.showSpecific(pos);
+				}
+				break;
+				default:
+				{
+					cout << "Invalid option!" << endl;
+				}
+				break;
 				}
 			}
-				break;
-			case 6:
+			break;
+			case 66:
 			{
-				cout << "--- SORT ORDER BY TOTAL ---" << endl;
-				cout << "1) Ascending" << endl;
-				cout << "2) Descending" << endl;
-				cin >> opt;
-				cout << endl;
-				switch (opt)
-				{
-					case 1:
-					{
-						cout << "--- SORT ORDER BY TOTAL ASCENDING---" << endl;
-						order.sortTotalAsc();
-					}
-						break;
-					case 2:
-					{
-						cout << "--- SORT ORDER BY TOTAL DESCENDING---" << endl;
-						order.sortTotalDesc();
-					}
-						break;
-					default:
-						cout << "LOG: Invalid option!" << endl;
-						break;
-				}
-			
+				order.insertNewOrder();
 			}
-				break;
-			case 7:
-			{
-				cout << "--- SORT ORDER BY ORDER DATE ---" << endl;
-				cout << "1) Ascending" << endl;
-				cout << "2) Descending" << endl;
-				cin >> opt;
-				cout << endl;
-				switch (opt)
-				{
-					case 1:
-					{
-						cout << "--- SORT ORDER BY ORDER DATE ASCENDING---" << endl;
-						order.sortOrderDateAsc();
-					}
-						break;
-					case 2:
-					{
-						cout << "--- SORT ORDER BY ORDER DATE DESCENDING---" << endl;
-						order.sortOrderDateDesc();
-					}
-						break;
-					default:
-						cout << "LOG: Invalid option!" << endl;
-						break;
-				}
-			}
-				break;
-			case 8:
+			break;
+			case 77:
 			{
 				cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
 				hardCodedOrder hardOrder[8];
 				generateHardCodedOrder(hardOrder);
 				order.getOrdrFromArray(hardOrder);
+				order.showAll();
 			}
-				break;
+			break;
+			case 88:
+			{
+				//show
+				order.showAll();
+				cout << endl;
+			}
+			break;
+			case 99:
+			{
+				next = 'n';
+			}
+			break;
 			default:
 			{
 				cout << "LOG: Invalid option!" << endl;
 			}
 				break;
 		}
-		//show
-		order.showAll();
-		cout << endl;
-
-		do {
-			cout << "Do you want to continue? (y/n)." << endl;
-			cin >> next;
-			if (next == 'n') {
-				cout << "\nLogging out...Thank you!" << endl;
-			}
-		} while (next != 'y' && next != 'n');
 
 	} while (next == 'y');
 
+	cout << "\nLogging out...Thank you!" << endl;
 	cout << "============================================================" << endl;
 }
 
@@ -246,7 +228,7 @@ int main()
 	userData(user);
 
 	if (validateUser(user) != -1) {
-		runAssignment();
+		runPOSystem();
 	}
 	
 }

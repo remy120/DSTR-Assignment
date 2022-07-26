@@ -27,7 +27,8 @@ void runPOSystem()
 		cout << "1) Insert new order" << endl;
 		cout << "2) Search Order" << endl;
 		cout << "3) Sort Order" << endl;
-		cout << "4) Delete Order" << endl;
+		cout << "4) Edit Order" << endl;
+		cout << "5) Delete Order" << endl;
 
 		cout << "77) Add hardcoded orders" << endl;
 		cout << "88) Show current orders" << endl;
@@ -82,7 +83,7 @@ void runPOSystem()
 					cout << "--- SEARCH ORDER BY ID ---" << endl;
 					cout << "OrderID: ";
 					cin >> oid;
-					order.searchOrderID(oid);
+					order.showSpecific(order.searchOrderID(oid));
 				}
 				break;
 				case 2:
@@ -108,6 +109,7 @@ void runPOSystem()
 				cout << "1) Sort by ID" << endl;
 				cout << "2) Sort by Total" << endl;
 				cout << "3) Sort by Order Date" << endl;
+				cout << "4) Sort by Quantity" << endl;
 
 				cout << "\nChoice? ";
 				cin >> sortopt;
@@ -128,6 +130,11 @@ void runPOSystem()
 					order.sortByDate();
 				}
 				break;
+				case 4:
+				{
+					order.sortByQuantity();
+				}
+				break;
 				default:
 				{
 					cout << "Invalid option!" << endl;
@@ -135,8 +142,25 @@ void runPOSystem()
 				break;
 				}
 			}
-			break;
+			break; 
 			case 4:
+			{
+				int chosenID, chosenCol = -1;
+				string newData;
+				order.showAll();
+				cout << "Provide order ID of the order that wanted to edit: ";
+				cin >> chosenID;
+				order.showSpecific(order.searchOrderID(chosenID));
+				cout << "Which column do you want to edit (One column each time)? ";
+				cin >> chosenCol;
+				cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+				cout << "Insert new data: ";
+				getline(cin, newData);
+
+				order.editData(chosenID, chosenCol, newData);
+			}
+			break;
+			case 5:
 			{
 				int delopt = -1;
 				cout << "1) Delete First Order" << endl;

@@ -7,6 +7,7 @@
 #include <sstream>		// stringstream
 #include <tuple>		//tuple, make_tuple, get
 #include <iomanip>
+#include <string>
 
 using namespace std;
 //using std::cout;
@@ -285,7 +286,7 @@ public:
 	}
 
 	//search for order based on ID
-	void searchOrderID(int id)
+	int searchOrderID(int id)
 	{
 		Order* current = head;
 		int position = -1;
@@ -293,7 +294,7 @@ public:
 		{
 			++position;
 			if (current->orderID == id)
-				showSpecific(position);
+				return position;
 			current = current->next;
 		}
 	}
@@ -362,14 +363,128 @@ public:
 	void showSpecific(int index)
 	{
 		Order* curr = head;
-		cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+		cout << "ID	|Buyer		|Email				|Order Date	|Total		|Address				|ItemID	|Quantity	|Status" << endl;
 		if (index < size)
 		{
 			for (int i = 0; i < index; ++i)
 			{
 				curr = curr->next;
 			}
-			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->buyerEmail << "		" << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->shippingAddss << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+		}
+	}
+
+	void editData(int chosenID, int chosenCol, string newData)
+	{
+		Order* curr = head, * index = nullptr;
+		int tempID, tempItem, tempQuantity;
+		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		double tempTotal;
+
+		if (head == nullptr) {
+			return;
+		}
+		else {
+			for (int i = 0; i < searchOrderID(chosenID); ++i)
+			{
+				curr = curr->next;
+			}
+
+			switch (chosenCol)
+			{
+				case 1:
+				{
+					curr->orderID = stoi(newData);
+				}
+				break; 
+				case 2:
+				{
+					curr->buyerName = newData;
+				}
+				break;
+				case 3:
+				{
+					curr->buyerEmail = newData;
+				}
+				break;
+				case 4:
+				{
+					curr->orderDate = newData;
+				}
+				break;
+				case 5:
+				{
+					curr->total = stod(newData);
+				}
+				break;
+				case 6:
+				{
+					curr->shippingAddss = newData;
+				}
+				break;
+				case 7:
+				{
+					curr->itemID = stoi(newData);
+				}
+				break;
+				case 8:
+				{
+					curr->quantity = stoi(newData);
+				}
+				break;
+				case 9:
+				{
+					curr->status = newData;
+				}
+				break;
+				default:
+				{
+					cout << "Invalid option!" << endl;
+				}
+				break;
+			}
+
+			while (curr != nullptr)
+			{
+				index = curr->next;
+				while (index != nullptr)
+				{
+					if (curr->orderID > index->orderID)
+					{
+						tempID = curr->orderID;
+						tempName = curr->buyerName;
+						tempEmail = curr->buyerEmail;
+						tempDate = curr->orderDate;
+						tempTotal = curr->total;
+						tempShipping = curr->shippingAddss;
+						tempItem = curr->itemID;
+						tempQuantity = curr->quantity;
+						tempStatus = curr->status;
+
+						curr->orderID = index->orderID;
+						curr->buyerName = index->buyerName;
+						curr->buyerEmail = index->buyerEmail;
+						curr->orderDate = index->orderDate;
+						curr->total = index->total;
+						curr->shippingAddss = index->shippingAddss;
+						curr->itemID = index->itemID;
+						curr->quantity = index->quantity;
+						curr->status = index->status;
+
+						index->orderID = tempID;
+						index->buyerName = tempName;
+						index->buyerEmail = tempEmail;
+						index->orderDate = tempDate;
+						index->total = tempTotal;
+						index->shippingAddss = tempShipping;
+						index->itemID = tempItem;
+						index->quantity = tempQuantity;
+						index->status = tempStatus;
+					}
+					index = index->next;
+				}
+				curr = curr->next;
+			}
 		}
 	}
 
@@ -457,6 +572,63 @@ public:
 		{
 			cout << "--- SORT ORDER BY ORDER DATE DESCENDING---" << endl;
 			sortOrderDateDesc();
+			showAll();
+		}
+		break;
+		default:
+			cout << "LOG: Invalid option!" << endl;
+			break;
+		}
+	}
+
+	//sort by quantity
+	void sortByQuantity()
+	{
+		string sortQuantityopt = "";
+		int count, SQopt;
+		cout << "--- SORT ORDER BY QUANTITY ---" << endl;
+		cout << "1) Ascending" << endl;
+		cout << "2) Descending" << endl;
+
+		//check if input is integer
+		do {
+			cout << "\nChoice?" << endl;
+			cin >> sortQuantityopt;
+			cout << endl;
+
+			for (int i = 0; i < sortQuantityopt.length(); i++)
+			{
+				if (isdigit(sortQuantityopt[i]) == false)
+				{
+					count = 1;
+					break;
+				}
+				else
+					count = 0;
+			}
+
+			if (count == 0)
+			{
+				SQopt = stoi(sortQuantityopt);
+			}
+			else
+				cout << "Invalid input!" << endl;
+
+		} while (count != 0);
+
+		switch (SQopt)
+		{
+		case 1:
+		{
+			cout << "--- SORT ORDER BY QUANTITY ASCENDING---" << endl;
+			sortQuantityAsc();
+			showAll();
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT ORDER BY QUANTITY DESCENDING---" << endl;
+			sortQuantityDesc();
 			showAll();
 		}
 		break;
@@ -828,7 +1000,117 @@ public:
 		}
 	}
 
+	//sort order based on quantity ascending
+	void sortQuantityAsc()
+	{
+		Order* curr = head, * index = nullptr;
+		int tempID, tempItem, tempQuantity;
+		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		double tempTotal;
 
+		if (head == nullptr) {
+			return;
+		}
+		else {
+			while (curr != nullptr)
+			{
+				index = curr->next;
+				while (index != nullptr)
+				{
+					if (curr->quantity > index->quantity)
+					{
+						tempID = curr->orderID;
+						tempName = curr->buyerName;
+						tempEmail = curr->buyerEmail;
+						tempDate = curr->orderDate;
+						tempTotal = curr->total;
+						tempShipping = curr->shippingAddss;
+						tempItem = curr->itemID;
+						tempQuantity = curr->quantity;
+						tempStatus = curr->status;
+
+						curr->orderID = index->orderID;
+						curr->buyerName = index->buyerName;
+						curr->buyerEmail = index->buyerEmail;
+						curr->orderDate = index->orderDate;
+						curr->total = index->total;
+						curr->shippingAddss = index->shippingAddss;
+						curr->itemID = index->itemID;
+						curr->quantity = index->quantity;
+						curr->status = index->status;
+
+						index->orderID = tempID;
+						index->buyerName = tempName;
+						index->buyerEmail = tempEmail;
+						index->orderDate = tempDate;
+						index->total = tempTotal;
+						index->shippingAddss = tempShipping;
+						index->itemID = tempItem;
+						index->quantity = tempQuantity;
+						index->status = tempStatus;
+					}
+					index = index->next;
+				}
+				curr = curr->next;
+			}
+		}
+	}
+
+	//sort order based on quantity descending
+	void sortQuantityDesc()
+	{
+		Order* curr = head, * index = nullptr;
+		int tempID, tempItem, tempQuantity;
+		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		double tempTotal;
+
+		if (head == nullptr) {
+			return;
+		}
+		else {
+			while (curr != nullptr)
+			{
+				index = curr->next;
+				while (index != nullptr)
+				{
+					if (curr->quantity < index->quantity)
+					{
+						tempID = curr->orderID;
+						tempName = curr->buyerName;
+						tempEmail = curr->buyerEmail;
+						tempDate = curr->orderDate;
+						tempTotal = curr->total;
+						tempShipping = curr->shippingAddss;
+						tempItem = curr->itemID;
+						tempQuantity = curr->quantity;
+						tempStatus = curr->status;
+
+						curr->orderID = index->orderID;
+						curr->buyerName = index->buyerName;
+						curr->buyerEmail = index->buyerEmail;
+						curr->orderDate = index->orderDate;
+						curr->total = index->total;
+						curr->shippingAddss = index->shippingAddss;
+						curr->itemID = index->itemID;
+						curr->quantity = index->quantity;
+						curr->status = index->status;
+
+						index->orderID = tempID;
+						index->buyerName = tempName;
+						index->buyerEmail = tempEmail;
+						index->orderDate = tempDate;
+						index->total = tempTotal;
+						index->shippingAddss = tempShipping;
+						index->itemID = tempItem;
+						index->quantity = tempQuantity;
+						index->status = tempStatus;
+					}
+					index = index->next;
+				}
+				curr = curr->next;
+			}
+		}
+	}
 
 };
 

@@ -4,7 +4,6 @@
 #include "OrderList_Structure.h"
 #include "login.cpp"
 
-using namespace std;
 using std::cout;
 using std::cin;
 

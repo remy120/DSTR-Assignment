@@ -64,11 +64,3 @@ inline int validateUser(user user[]) {
 	} while (next == 'y');
 	return -1;
 }
-
-//int main() {
-//	user user[3];
-//	userData(user);
-//	validateUser(user);
-//
-//	return 0;
-//}

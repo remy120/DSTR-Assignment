@@ -7,10 +7,41 @@
 #include <sstream>		// stringstream
 #include <tuple>		//tuple, make_tuple, get
 #include <iomanip>
+#include <string>
 
 using namespace std;
-//using std::cout;
-//using std::cin;
+
+//check if choice input is integer
+inline int checkChoiceInt() {
+	string checkint;
+	int count;
+	do {
+		cout << "\nChoice?" << endl;
+		cin >> checkint;
+		cout << endl;
+
+		for (int i = 0; i < checkint.length(); i++)
+		{
+			if (isdigit(checkint[i]) == false)
+			{
+				count = 1;
+				break;
+			}
+			else
+				count = 0;
+		}
+
+		if (count == 0)
+		{
+			return stoi(checkint);
+		}
+		else
+		{
+			cout << "Invalid input!" << endl;
+		}
+
+	} while (count != 0);
+}
 
 inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 	hardCodedOrder[0].horderID = 1;
@@ -18,7 +49,7 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 	hardCodedOrder[0].hbuyerEmail = "haydenE@mail.com";
 	hardCodedOrder[0].horderDate = "2021/04/09";
 	hardCodedOrder[0].htotal = 394.80;
-	hardCodedOrder[0].hshippingAddss = "G 36A Jln Penrissen Batu 7 Kuching";
+	hardCodedOrder[0].hshippingAddss = "Penrissen Batu 7 Kuching";
 	hardCodedOrder[0].hitemID = 1;
 	//hardCodedOrder[0].hitemID.push_back(5);
 	//hardCodedOrder[0].hitemID.push_back(7);
@@ -29,10 +60,10 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 
 	hardCodedOrder[1].horderID = 3;
 	hardCodedOrder[1].hbuyerName = "Ira Prudence";
-	hardCodedOrder[1].hbuyerEmail = "iraP@mail.com";
+	hardCodedOrder[1].hbuyerEmail = "prudenceI@mail.com";
 	hardCodedOrder[1].horderDate = "2021/08/04";
 	hardCodedOrder[1].htotal = 373.70;
-	hardCodedOrder[1].hshippingAddss = "Sek Memandu Kenderaan Darat Jln Au3/1";
+	hardCodedOrder[1].hshippingAddss = "Sek Memandu Kenderaan";
 	hardCodedOrder[1].hitemID = 2;
 	//hardCodedOrder[1].hitemID.push_back(4);
 	//hardCodedOrder[1].hitemID.push_back(6);
@@ -57,10 +88,10 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 
 	hardCodedOrder[3].horderID = 6;
 	hardCodedOrder[3].hbuyerName = "Ethelyn Jane";
-	hardCodedOrder[3].hbuyerEmail = "haydenE@mail.com";
+	hardCodedOrder[3].hbuyerEmail = "ethelynJ@mail.com";
 	hardCodedOrder[3].horderDate = "2022/04/08";
 	hardCodedOrder[3].htotal = 394.80;
-	hardCodedOrder[3].hshippingAddss = "G 36A Jln Penrissen Batu 7 Kuching";
+	hardCodedOrder[3].hshippingAddss = "OUG Parklane Block D";
 	hardCodedOrder[3].hitemID = 1;
 	//hardCodedOrder[3].hitemID.push_back(5);
 	//hardCodedOrder[3].hitemID.push_back(7);
@@ -71,10 +102,10 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 
 	hardCodedOrder[4].horderID = 2;
 	hardCodedOrder[4].hbuyerName = "Darnell Axel";
-	hardCodedOrder[4].hbuyerEmail = "iraP@mail.com";
+	hardCodedOrder[4].hbuyerEmail = "darnellA@mail.com";
 	hardCodedOrder[4].horderDate = "2021/07/04";
 	hardCodedOrder[4].htotal = 373.70;
-	hardCodedOrder[4].hshippingAddss = "Sek Memandu Kenderaan Darat Jln Au3/1";
+	hardCodedOrder[4].hshippingAddss = "Pavillion Bukit Jalil";
 	hardCodedOrder[4].hitemID = 2;
 	//hardCodedOrder[4].hitemID.push_back(4);
 	//hardCodedOrder[4].hitemID.push_back(6);
@@ -85,10 +116,10 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 
 	hardCodedOrder[5].horderID = 7;
 	hardCodedOrder[5].hbuyerName = "Lavena Ping";
-	hardCodedOrder[5].hbuyerEmail = "michelleZ@mail.com";
+	hardCodedOrder[5].hbuyerEmail = "lavenaP@mail.com";
 	hardCodedOrder[5].horderDate = "2022/05/25";
 	hardCodedOrder[5].htotal = 57;
-	hardCodedOrder[5].hshippingAddss = "No.87, Medan Sepadu";
+	hardCodedOrder[5].hshippingAddss = "Taman Teknologi Malaysia";
 	hardCodedOrder[5].hitemID = 9;
 	//hardCodedOrder[5].hitemID.push_back(10);
 	//hardCodedOrder[5].hitemID.push_back(3);
@@ -99,10 +130,10 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 
 	hardCodedOrder[6].horderID = 4;
 	hardCodedOrder[6].hbuyerName = "Marlee Sherri";
-	hardCodedOrder[6].hbuyerEmail = "iraP@mail.com";
+	hardCodedOrder[6].hbuyerEmail = "marleeS@mail.com";
 	hardCodedOrder[6].horderDate = "2021/08/04";
 	hardCodedOrder[6].htotal = 373.70;
-	hardCodedOrder[6].hshippingAddss = "Sek Memandu Kenderaan Darat Jln Au3/1";
+	hardCodedOrder[6].hshippingAddss = "Taman Bukit Damansara";
 	hardCodedOrder[6].hitemID = 2;
 	//hardCodedOrder[6].hitemID.push_back(4);
 	//hardCodedOrder[6].hitemID.push_back(6);
@@ -113,10 +144,10 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 
 	hardCodedOrder[7].horderID = 8;
 	hardCodedOrder[7].hbuyerName = "Drea Polly";
-	hardCodedOrder[7].hbuyerEmail = "michelleZ@mail.com";
+	hardCodedOrder[7].hbuyerEmail = "dreaP@mail.com";
 	hardCodedOrder[7].horderDate = "2022/05/27";
 	hardCodedOrder[7].htotal = 57;
-	hardCodedOrder[7].hshippingAddss = "No.87, Medan Sepadu";
+	hardCodedOrder[7].hshippingAddss = "D-24 Muasang King Farm";
 	hardCodedOrder[7].hitemID = 9;
 	//hardCodedOrder[7].hitemID.push_back(10);
 	//hardCodedOrder[7].hitemID.push_back(3);
@@ -134,7 +165,6 @@ public:
 
 	OrderList()
 	{
-		cout << "--- Constructing the LinkedList object ---" << endl;
 		this->size = 0;
 		this->head = nullptr;
 	}
@@ -217,7 +247,7 @@ public:
 			head = head->next; //move the head pointer to the 2nd node
 			delete toBeDeleted;
 			size--;
-			cout << "LOG:  First order is deleted..." << endl;
+			cout << "First order is deleted..." << endl;
 		}
 	}
 
@@ -239,22 +269,22 @@ public:
 				beforeLast->next = nullptr;
 			}
 			size--;
-			cout << "LOG:  Last order is deleted..." << endl;
+			cout << "Last order is deleted..." << endl;
 		}
 	}
 
 	//delete specific item based on index
-	void deleteItemAt(int index)
+	void deleteItemAt(int position)
 	{
-		if (index < size)
+		if (position < size)
 		{
 			cout << "--- DELETE ORDER BY INDEX ---" << endl;
-			if (index == 0)
+			if (position == 0)
 				deleteFirst();
 			else {
 				Order* prev = nullptr;
 				Order* toDelete = head;
-				for (int i = 0; i < index; ++i)
+				for (int i = 0; i < position; ++i)
 				{
 					prev = toDelete;
 					toDelete = toDelete->next;
@@ -262,10 +292,9 @@ public:
 				prev->next = toDelete->next;
 				delete toDelete;
 				size--;
-				cout << "LOG:  Order #" << index << " is deleted..." << endl;
+				cout << "Order at position #" << position << " is deleted..." << endl;
 			}
-
-		}//if
+		}
 	}
 
 	//remove specific order based on orderID
@@ -283,8 +312,23 @@ public:
 				else
 					deleteItemAt(index);
 			}
-		}//if
+		}
 	}
+
+	//search for order based on ID
+	int searchOrderID(int id)
+	{
+		Order* current = head;
+		int position = -1;
+		while (current != nullptr)
+		{
+			++position;
+			if (current->orderID == id)
+				return position;
+			current = current->next;
+		}
+	}
+
 
 	//get linkedlist size
 	int getSize()
@@ -307,6 +351,266 @@ public:
 		{
 			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
 			curr = curr->next;
+		}
+	}
+
+	//insert new order
+	void insertNewOrder()
+	{
+		int amount = 0;
+		//asking for number of orders will be inserted at once
+		cout << "How many orders? " << endl;
+		if (amount = checkChoiceInt()) {
+			cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+
+			for (int i = 0; i < amount; ++i)
+			{
+				string oID, name, email, date, total, shipping, item, quantity;
+				cout << "\n--- ENTER ORDER ID #" << (i + 1) << "---" << endl << endl;
+				cout << "Order ID= ";
+				getline(cin, oID);
+				cout << "Buyer Name= ";
+				getline(cin, name);
+				cout << "Buyer Email= ";
+				getline(cin, email);
+				cout << "Order Date (eg. 2022/05/20)= ";
+				getline(cin, date);
+				cout << "Total= RM";
+				getline(cin, total);
+				cout << "Shipping Address= ";
+				getline(cin, shipping);
+				cout << "Item ID= ";
+				getline(cin, item);
+				cout << "Quantity= ";
+				getline(cin, quantity);
+
+				insertNew(stoi(oID), name, email, date, stod(total), shipping, stoi(item), stoi(quantity));
+			}
+			showAll();
+		}
+	}
+
+	//show linkedlist
+	void showSpecific(int index)
+	{
+		Order* curr = head;
+		cout << "ID	|Buyer		|Email			|Order Date	|Total		|Address		|ItemID	|Quantity|Status" << endl;
+		if (index < size)
+		{
+			for (int i = 0; i < index; ++i)
+			{
+				curr = curr->next;
+			}
+			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->buyerEmail << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->shippingAddss << "	 " << curr->itemID << "	 " << curr->quantity << "	  " << curr->status << endl;
+		}
+	}
+
+	void editData(int chosenID, int chosenCol, string newData)
+	{
+		Order* curr = head, * index = nullptr;
+		int tempID, tempItem, tempQuantity;
+		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		double tempTotal;
+
+		if (head == nullptr) {
+			return;
+		}
+		else {
+			for (int i = 0; i < searchOrderID(chosenID); ++i)
+			{
+				curr = curr->next;
+			}
+
+			switch (chosenCol)
+			{
+				case 1:
+				{
+					if (stoi(newData)) {
+						curr->orderID = stoi(newData);
+					}
+					else {
+						cout << "New data is invalid";
+					}
+				}
+				break; 
+				case 2:
+				{
+					curr->buyerName = newData;
+				}
+				break;
+				case 3:
+				{
+					curr->buyerEmail = newData;
+				}
+				break;
+				case 4:
+				{
+					curr->orderDate = newData;
+				}
+				break;
+				case 5:
+				{
+					if (stoi(newData)) {
+						curr->total = stod(newData);
+					}
+					else {
+						cout << "New data is invalid";
+					}
+					
+				}
+				break;
+				case 6:
+				{
+					curr->shippingAddss = newData;
+				}
+				break;
+				case 7:
+				{
+					if (stoi(newData)) {
+						curr->itemID = stod(newData);
+					}
+					else {
+						cout << "New data is invalid";
+					}
+				}
+				break;
+				case 8:
+				{
+					if (stoi(newData)) {
+						curr->quantity = stod(newData);
+					}
+					else {
+						cout << "New data is invalid";
+					}
+				}
+				break;
+				case 9:
+				{
+					curr->status = newData;
+				}
+				break;
+				default:
+				{
+					cout << "Invalid option!" << endl;
+				}
+				break;
+			}
+		}
+	}
+
+	//sort by ID
+	void sortByID()
+	{
+		cout << "--- SORT ORDER BY ID ---" << endl;
+		cout << "1) Ascending" << endl;
+		cout << "2) Descending" << endl;
+
+		switch (checkChoiceInt())
+		{
+		case 1:
+		{
+			cout << "--- SORT ORDER BY ID ASCENDING---" << endl;
+			sortIDAsc();
+			showAll();
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT ORDER BY ID DESCENDING---" << endl;
+			sortIDDesc();
+			showAll();
+		}
+		break;
+		default:
+			cout << "Invalid option!" << endl;
+			break;
+		}
+
+	}
+
+	//sort by total
+	void sortByTotal()
+	{
+		cout << "--- SORT ORDER BY TOTAL ---" << endl;
+		cout << "1) Ascending" << endl;
+		cout << "2) Descending" << endl;
+
+		switch (checkChoiceInt())
+		{
+		case 1:
+		{
+			cout << "--- SORT ORDER BY TOTAL ASCENDING---" << endl;
+			sortTotalAsc();
+			showAll();
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT ORDER BY TOTAL DESCENDING---" << endl;
+			sortTotalDesc();
+			showAll();
+		}
+		break;
+		default:
+			cout << "Invalid option!" << endl;
+			break;
+		}
+	}
+
+	//sort by date
+	void sortByDate()
+	{
+		cout << "--- SORT ORDER BY ORDER DATE ---" << endl;
+		cout << "1) Ascending" << endl;
+		cout << "2) Descending" << endl;
+		switch (checkChoiceInt())
+		{
+		case 1:
+		{
+			cout << "--- SORT ORDER BY ORDER DATE ASCENDING---" << endl;
+			sortOrderDateAsc();
+			showAll();
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT ORDER BY ORDER DATE DESCENDING---" << endl;
+			sortOrderDateDesc();
+			showAll();
+		}
+		break;
+		default:
+			cout << "LOG: Invalid option!" << endl;
+			break;
+		}
+	}
+
+	//sort by quantity
+	void sortByQuantity()
+	{
+		cout << "--- SORT ORDER BY QUANTITY ---" << endl;
+		cout << "1) Ascending" << endl;
+		cout << "2) Descending" << endl;
+
+		switch (checkChoiceInt())
+		{
+		case 1:
+		{
+			cout << "--- SORT ORDER BY QUANTITY ASCENDING---" << endl;
+			sortQuantityAsc();
+			showAll();
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT ORDER BY QUANTITY DESCENDING---" << endl;
+			sortQuantityDesc();
+			showAll();
+		}
+		break;
+		default:
+			cout << "LOG: Invalid option!" << endl;
+			break;
 		}
 	}
 

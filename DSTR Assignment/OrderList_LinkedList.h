@@ -112,7 +112,7 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 	hardCodedOrder[4].hquantity = 4;
 	//hardCodedOrder[4].hquantity.push_back(8);
 	//hardCodedOrder[4].hquantity.push_back(6);
-	hardCodedOrder[4].hstatus = "Shipping";
+	hardCodedOrder[4].hstatus = "Pending";
 
 	hardCodedOrder[5].horderID = 7;
 	hardCodedOrder[5].hbuyerName = "Lavena Ping";
@@ -126,7 +126,7 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 	hardCodedOrder[5].hquantity = 1;
 	//hardCodedOrder[5].hquantity.push_back(2);
 	//hardCodedOrder[5].hquantity.push_back(2);
-	hardCodedOrder[5].hstatus = "New";
+	hardCodedOrder[5].hstatus = "Pending";
 
 	hardCodedOrder[6].horderID = 4;
 	hardCodedOrder[6].hbuyerName = "Marlee Sherri";
@@ -140,7 +140,7 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 	hardCodedOrder[6].hquantity = 4;
 	//hardCodedOrder[6].hquantity.push_back(8);
 	//hardCodedOrder[6].hquantity.push_back(6);
-	hardCodedOrder[6].hstatus = "Shipping";
+	hardCodedOrder[6].hstatus = "Pending";
 
 	hardCodedOrder[7].horderID = 8;
 	hardCodedOrder[7].hbuyerName = "Drea Polly";
@@ -154,7 +154,7 @@ inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
 	hardCodedOrder[7].hquantity = 1;
 	//hardCodedOrder[7].hquantity.push_back(2);
 	//hardCodedOrder[7].hquantity.push_back(2);
-	hardCodedOrder[7].hstatus = "New";
+	hardCodedOrder[7].hstatus = "Pending";
 }
 
 class OrderList
@@ -214,7 +214,7 @@ public:
 		newNode->shippingAddss = shipping;
 		newNode->itemID = item;
 		newNode->quantity = quantity;
-		newNode->status = "New";
+		newNode->status = "Pending";
 
 		newNode->next = nullptr;
 

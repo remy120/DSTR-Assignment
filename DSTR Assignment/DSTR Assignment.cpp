@@ -7,7 +7,7 @@
 using std::cout;
 using std::cin;
 
-void runPOSystem()
+void runPOSystem(int role)
 {
 	cout << endl;
 	cout << "--- Welcome to Purchasing Order System ---" << endl;
@@ -25,9 +25,16 @@ void runPOSystem()
 		cout << "3) Sort Order" << endl;
 		cout << "4) Edit Order" << endl;
 		cout << "5) Delete Order" << endl;
-		if (!added) {
-			cout << "77) Add hardcoded orders" << endl;
+
+		if (role == 1) {
+			cout << "6) Generate Report" << endl;
+			cout << "7) Sort Report" << endl;
 		}
+
+		if (!added) {
+			cout << "66) Add hardcoded orders" << endl;
+		}
+		cout << "77) Display original unsorted orders" << endl;
 		cout << "88) Show current orders" << endl;
 		cout << "99) Logout and Exit" << endl;
 
@@ -186,7 +193,17 @@ void runPOSystem()
 			}
 		}
 		break;
-		case 77:
+		case 6:
+		{
+			//aya generate report code here
+		}
+		break;
+		case 7:
+		{
+			cout << "--- SORT REPORT ---" << endl;
+		}
+		break;
+		case 66:
 		{
 			cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
 			hardCodedOrder hardOrder[8];
@@ -194,6 +211,11 @@ void runPOSystem()
 			order.getOrdrFromArray(hardOrder);
 			order.showAll();
 			added = true;
+		}
+		break;
+		case 77:
+		{
+			//aya display original list code here
 		}
 		break;
 		case 88:
@@ -226,8 +248,6 @@ int main()
 	user user[3];
 	userData(user);
 
-	if (validateUser(user) != -1) {
-		runPOSystem();
-	}
+	runPOSystem(validateUser(user));
 	
 }

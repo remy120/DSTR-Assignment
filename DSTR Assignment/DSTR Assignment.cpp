@@ -262,7 +262,7 @@ void runPOSystem(int role)
 			case 66:
 			{
 				cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
-				hardCodedOrder hardOrder[8];
+				Order hardOrder[8];
 				generateHardCodedOrder(hardOrder);
 				order.getOrdrFromArray(hardOrder);
 				order.showAll();
@@ -302,9 +302,8 @@ void runPOSystem(int role)
 
 int main()
 {
-	user user[3];
-	userData(user);
+	user users[5];
+	userData(users);
 
-	runPOSystem(validateUser(user));
-	
+	runPOSystem(validateUser(users));
 }

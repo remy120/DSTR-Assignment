@@ -25,18 +25,17 @@ void runPOSystem(int role)
 		cout << "3) Sort Order" << endl;
 		cout << "4) Edit Order" << endl;
 		cout << "5) Delete Order" << endl;
-		cout << "8) View Pending orders" << endl;
+		cout << "6) View Pending orders" << endl;
 		
 		if (role == 1) {
-			cout << "6) Generate Report" << endl;
-			cout << "7) Sort Report" << endl;
+			cout << "7) Generate Report" << endl;
+			cout << "8) Sort Report" << endl;
 		}
 		cout << endl;
 
 		if (!added) {
 			cout << "66) Add hardcoded orders" << endl;
 		}
-		cout << "77) Display original unsorted orders" << endl;
 		cout << "88) Show current orders" << endl;
 		cout << "99) Logout and Exit" << endl;
 
@@ -197,6 +196,35 @@ void runPOSystem(int role)
 			break;
 			case 6:
 			{
+				char decision;
+				int chosenID, chosenCol = 0;
+				string newType;
+				order.generateReport(2);
+
+				do {
+					cout << "Modify Pending Order Type? (y/n)" << endl;
+					cin >> decision;
+
+					if (decision == 'y') {
+						cout << "Please provide order ID: ";
+						cin >> chosenID;
+						while (cin.fail()) {
+							cout << "Please input order ID only" << std::endl;
+							cin.clear();
+							cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+							cin >> chosenID;
+						}
+						order.searchOrderID(chosenID);
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						cout << "New Type: ";
+						getline(cin, newType);
+						order.editData(chosenID, 9, newType);
+					}
+				} while (decision != 'y' && decision != 'n');
+			}
+			break;
+			case 7:
+			{
 				cout << "1) View completed orders" << endl;
 				cout << "2) View pending orders" << endl;
 				cout << "3) View canceled orders" << endl;
@@ -235,7 +263,7 @@ void runPOSystem(int role)
 				}
 			}
 			break;
-			case 7:
+			case 8:
 			{
 				cout << "1) Report for newest orders" << endl;
 				cout << "2) Report for oldest orders" << endl;
@@ -260,35 +288,6 @@ void runPOSystem(int role)
 				}
 			}
 			break;
-			case 8:
-			{
-				char decision;
-				int chosenID, chosenCol = 0;
-				string newType;
-				order.generateReport(2);
-
-				do {
-					cout << "Modify Pending Order Type? (y/n)" << endl;
-					cin >> decision;
-
-					if (decision == 'y') {
-						cout << "Please provide order ID: ";
-						cin >> chosenID;
-						while (cin.fail()) {
-							cout << "Please input order ID only" << std::endl;
-							cin.clear();
-							cin.ignore(numeric_limits <streamsize> ::max(), '\n');
-							cin >> chosenID;
-						}
-						order.searchOrderID(chosenID);
-						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
-						cout << "New Type: ";
-						getline(cin, newType);
-						order.editData(chosenID, 9, newType);
-					}
-				} while (decision != 'y' && decision != 'n');
-			}
-			break;
 			case 66:
 			{
 				cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
@@ -297,12 +296,6 @@ void runPOSystem(int role)
 				order.getOrdrFromArray(hardOrder);
 				order.showAll();
 				added = true;
-			}
-			break;
-			case 77:
-			{
-				cout << "--- DISPLAYING ORIGINAL UNSORTED ORDERS ---" << endl;
-				order.showAll();
 			}
 			break;
 			case 88:

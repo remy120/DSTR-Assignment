@@ -20,16 +20,4 @@ struct Order {
 	Order* next;
 };
 
-struct hardCodedOrder {
-	int horderID;
-	string hbuyerName;
-	string hbuyerEmail;
-	string horderDate;
-	double htotal;
-	string hshippingAddss;
-	int hitemID;
-	int hquantity;
-	string hstatus;
-};
-
 #endif /* ORDERLIST_STRUCTURE_H_ */

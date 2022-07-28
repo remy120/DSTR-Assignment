@@ -15,6 +15,7 @@ struct Order {
 	string shippingAddss;
 	int itemID;
 	int quantity;
+	string type;
 	string status;
 
 	Order* next;

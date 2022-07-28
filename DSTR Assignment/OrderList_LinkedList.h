@@ -41,17 +41,18 @@ inline int checkChoiceInt() {
 		}
 
 	} while (count != 0);
+	return 0;
 }
 
 inline void generateHardCodedOrder(Order* hardCodedOrder) {
-	hardCodedOrder[0] = { 1, "Hayden Emmett", "haydenE@mail.com", "2021/04/09", 394.80, "Penrissen Batu 7 Kuching", 1, 3, "Completed" };
-	hardCodedOrder[1] = { 3, "Ira Prudence", "prudenceI@mail.com", "2021/08/04", 373.70, "Sek Memandu Kenderaan", 2, 4, "Completed" };
-	hardCodedOrder[2] = { 5, "Michael Zandra", "michelleZ@mail.com", "2022/01/16", 57, "No.87, Medan Sepadu", 9, 1, "Completed" };
-	hardCodedOrder[3] = { 6, "Ethelyn Jane", "ethelynJ@mail.com", "2022/04/08", 394.80, "OUG Parklane Block D", 1, 3, "Cancelled" };
-	hardCodedOrder[4] = { 2, "Darnell Axel", "darnellA@mail.com", "2021/07/04", 373.7, "Pavillion Bukit Jalil", 2, 4, "Pending" };
-	hardCodedOrder[5] = { 7, "Lavena Ping", "lavenaP@mail.com", "2022/05/25", 57, "Taman Teknologi Malaysia", 9, 1, "Pending" };
-	hardCodedOrder[6] = { 4, "Marlee Sherri", "marleeS@mail.com", "2021/08/04", 373.70, "Taman Bukit Damansara", 2, 4, "Pending" };
-	hardCodedOrder[7] = { 8, "Drea Polly", "pollyD@mail.com", "2022/05/27", 57, "D-24 Muasang King Farm", 9, 1, "Pending" };
+	hardCodedOrder[0] = { 1, "Hayden Emmett", "haydenE@mail.com", "2021/04/09", 394.80, "Penrissen 7 Kuching", 1, 3, "Urgent", "Completed" };
+	hardCodedOrder[1] = { 3, "Ira Prudence", "prudenceI@mail.com", "2021/08/04", 373.70, "Sek Memandu Kenderaan", 2, 4, "Normal", "Completed"};
+	hardCodedOrder[2] = { 5, "Michael Zandra", "michelleZ@mail.com", "2022/01/16", 57, "No.87, Medan Sepadu", 9, 1, "Normal", "Completed" };
+	hardCodedOrder[3] = { 6, "Ethelyn Jane", "ethelynJ@mail.com", "2022/04/08", 394.80, "OUG Parklane Block D", 1, 3, "Normal", "Cancelled" };
+	hardCodedOrder[4] = { 2, "Darnell Axel", "darnellA@mail.com", "2021/07/04", 373.7, "Pavillion Bukit Jalil", 2, 4, "Urgent", "Pending" };
+	hardCodedOrder[5] = { 7, "Lavena Ping", "lavenaP@mail.com", "2022/05/25", 57, "Taman Teknologi Malaysia", 9, 1, "Normal", "Pending" };
+	hardCodedOrder[6] = { 4, "Marlee Sherri", "marleeS@mail.com", "2021/08/04", 373.70, "Taman Bukit Damansara", 2, 4, "Urgent", "Pending"};
+	hardCodedOrder[7] = { 8, "Drea Polly", "pollyD@mail.com", "2022/05/27", 57, "D-24 Muasang King", 9, 1, "Normal", "Pending" };
 }
 
 class OrderList
@@ -113,6 +114,7 @@ public:
 			newNode->shippingAddss = hardCodedOrder[i].shippingAddss;
 			newNode->itemID = hardCodedOrder[i].orderID;
 			newNode->quantity = hardCodedOrder[i].quantity;
+			newNode->type = hardCodedOrder[i].type;
 			newNode->status = hardCodedOrder[i].status;
 
 			newNode->next = nullptr;
@@ -142,6 +144,7 @@ public:
 		newNode->shippingAddss = shipping;
 		newNode->itemID = item;
 		newNode->quantity = quantity;
+		newNode->type = "Normal";
 		newNode->status = "Pending";
 
 		newNode->next = nullptr;
@@ -255,6 +258,8 @@ public:
 				return position;
 			current = current->next;
 		}
+		cout << "Order does not exist!"<<endl;
+		return -1;
 	}
 
 	//get linkedlist size
@@ -268,7 +273,7 @@ public:
 	{
 		Order* curr = head;
 		cout << "\n--- TOTAL ORDERS = " << size << " ---" << endl;
-		cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+		cout << "ID	|Buyer		|Order Date	|Total		|Type	|Status" << endl;
 		if (head == nullptr)
 		{
 			cout << "List is empty" << endl;
@@ -276,7 +281,7 @@ public:
 		}
 		while (curr != nullptr)
 		{
-			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->type << "	 " << curr->status << endl;
 			curr = curr->next;
 		}
 	}
@@ -285,6 +290,7 @@ public:
 	{
 		Order* curr = head;
 		double sum = 0;
+		int count = 0;
 		
 		if (head == nullptr) {
 			cout << "List is empty" << endl;
@@ -293,45 +299,63 @@ public:
 
 		// Completed Status
 		if (statusId == 1) {
-			cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+			cout << "ID	|Buyer		|Order Date	|Total		|Type	|Status" << endl;
 			while (curr != nullptr)
 			{
 				if (curr->status == "Completed") {
-					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->type << "	 " << curr->status << endl;
 					curr = curr->next;
+					count++;
 				}
 				else {
 					curr = curr->next;
 				}
 			}
+			cout << "Total completed order:" << count << endl;
 		}
 
 		if (statusId == 2) {
-			cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+			cout << "ID	|Buyer		|Order Date	|Total		|Type	|Status" << endl;
 			while (curr != nullptr)
 			{
-				if (curr->status == "Pending") {
-					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+				if (curr->status == "Pending" && curr->type == "Urgent") {
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->type << "	 " << curr->status << endl;
 					curr = curr->next;
+					count++;
 				}
 				else {
 					curr = curr->next;
 				}
 			}
+			Order* curr = head;
+			while (curr != nullptr)
+			{
+				if (curr->status == "Pending" && curr->type == "Normal") {
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->type << "	 " << curr->status << endl;
+					curr = curr->next;
+					count++;
+				}
+				else {
+					curr = curr->next;
+				}
+			}
+			cout << "Total pending order:" << count << endl;
 		}
 
 		if (statusId == 3) {
-			cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+			cout << "ID	|Buyer		|Order Date	|Total		|Type	|Status" << endl;
 			while (curr != nullptr)
 			{
 				if (curr->status == "Cancelled") {
-					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->type << "	 " << curr->status << endl;
 					curr = curr->next;
+					count++;
 				}
 				else {
 					curr = curr->next;
 				}
 			}
+			cout << "Total cancelled order:" << count << endl;
 		}
 
 		if (statusId == 4) {
@@ -340,24 +364,24 @@ public:
 			year = checkChoiceInt();
 
 			cout << "--- " << year << " ORDERS --- " << endl;
-			cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+			cout << "ID	|Buyer		|Order Date	|Total		|Type	|Status" << endl;
 			while (curr != nullptr)
 			{
 				char seperator = '/'; 
 				split(curr->orderDate, seperator);
 
-				if (value[0] == to_string(year) && curr->status != "Cancelled") {
-					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+				if (value[0] == to_string(year) && curr->status == "Completed") {
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->type << "	 " << curr->status << endl;
 
 					sum += curr->total;
+					count++;
 					curr = curr->next;
 				}
 				else {
 					curr = curr->next;
 				}
 			}
-
-			cout << "Total Revenue is RM" << sum << endl;
+			cout << "Total Revenue is RM" << sum << " from " << count << " orders" << endl;
 		}
 	}
 
@@ -400,15 +424,17 @@ public:
 	//show linkedlist
 	void showSpecific(int index)
 	{
-		Order* curr = head;
-		cout << "ID	|Buyer		|Email			|Order Date	|Total		|Address		|ItemID	|Quantity|Status" << endl;
-		if (index < size)
-		{
-			for (int i = 0; i < index; ++i)
+		if (index != -1) {
+			Order* curr = head;
+			cout << "ID	|Buyer		|Email			|Order Date	|Total		|Address		|ItemID	|Quantity	|Type	|Status" << endl;
+			if (index < size)
 			{
-				curr = curr->next;
+				for (int i = 0; i < index; ++i)
+				{
+					curr = curr->next;
+				}
+				cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->buyerEmail << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->shippingAddss << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->type << " " << curr->status << endl;
 			}
-			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->buyerEmail << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->shippingAddss << "	 " << curr->itemID << "	 " << curr->quantity << "	  " << curr->status << endl;
 		}
 	}
 
@@ -420,13 +446,14 @@ public:
 			return;
 		}
 		else {
-			for (int i = 0; i < searchOrderID(chosenID); ++i)
-			{
-				curr = curr->next;
-			}
+			if (searchOrderID(chosenID) != -1) {
+				for (int i = 0; i < searchOrderID(chosenID); ++i)
+				{
+					curr = curr->next;
+				}
 
-			switch (chosenCol)
-			{
+				switch (chosenCol)
+				{
 				case 1:
 				{
 					if (stoi(newData)) {
@@ -436,7 +463,7 @@ public:
 						cout << "New data is invalid";
 					}
 				}
-				break; 
+				break;
 				case 2:
 				{
 					curr->buyerName = newData;
@@ -460,7 +487,7 @@ public:
 					else {
 						cout << "New data is invalid";
 					}
-					
+
 				}
 				break;
 				case 6:
@@ -490,6 +517,11 @@ public:
 				break;
 				case 9:
 				{
+					curr->type = newData;
+				}
+				break;
+				case 10:
+				{
 					curr->status = newData;
 				}
 				break;
@@ -498,7 +530,9 @@ public:
 					cout << "Invalid option!" << endl;
 				}
 				break;
+				}
 			}
+			
 		}
 	}
 
@@ -623,7 +657,7 @@ public:
 	{
 		Order* curr = head, * index = nullptr;
 		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		string tempName, tempEmail, tempDate, tempShipping, tempType, tempStatus;
 		double tempTotal;
 
 		if (head == nullptr) {
@@ -645,6 +679,7 @@ public:
 						tempShipping = curr->shippingAddss;
 						tempItem = curr->itemID;
 						tempQuantity = curr->quantity;
+						tempType = curr->type;
 						tempStatus = curr->status;
 
 						curr->orderID = index->orderID;
@@ -655,6 +690,7 @@ public:
 						curr->shippingAddss = index->shippingAddss;
 						curr->itemID = index->itemID;
 						curr->quantity = index->quantity;
+						curr->type = index->type;
 						curr->status = index->status;
 
 						index->orderID = tempID;
@@ -665,6 +701,7 @@ public:
 						index->shippingAddss = tempShipping;
 						index->itemID = tempItem;
 						index->quantity = tempQuantity;
+						index->type = tempType;
 						index->status = tempStatus;
 					}
 					index = index->next;
@@ -679,7 +716,7 @@ public:
 	{
 		Order* curr = head, * index = nullptr;
 		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		string tempName, tempEmail, tempDate, tempShipping, tempType, tempStatus;
 		double tempTotal;
 
 		if (head == nullptr) {
@@ -701,6 +738,7 @@ public:
 						tempShipping = curr->shippingAddss;
 						tempItem = curr->itemID;
 						tempQuantity = curr->quantity;
+						tempType = curr->type;
 						tempStatus = curr->status;
 
 						curr->orderID = index->orderID;
@@ -711,6 +749,7 @@ public:
 						curr->shippingAddss = index->shippingAddss;
 						curr->itemID = index->itemID;
 						curr->quantity = index->quantity;
+						curr->type = index->type;
 						curr->status = index->status;
 
 						index->orderID = tempID;
@@ -721,6 +760,7 @@ public:
 						index->shippingAddss = tempShipping;
 						index->itemID = tempItem;
 						index->quantity = tempQuantity;
+						index->type = tempType;
 						index->status = tempStatus;
 					}
 					index = index->next;
@@ -735,7 +775,7 @@ public:
 	{
 		Order* curr = head, * index = nullptr;
 		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		string tempName, tempEmail, tempDate, tempShipping, tempType, tempStatus;
 		double tempTotal;
 
 		if (head == nullptr) {
@@ -757,6 +797,7 @@ public:
 						tempShipping = curr->shippingAddss;
 						tempItem = curr->itemID;
 						tempQuantity = curr->quantity;
+						tempType = curr->type;
 						tempStatus = curr->status;
 
 						curr->orderID = index->orderID;
@@ -767,6 +808,7 @@ public:
 						curr->shippingAddss = index->shippingAddss;
 						curr->itemID = index->itemID;
 						curr->quantity = index->quantity;
+						curr->type = index->type;
 						curr->status = index->status;
 
 						index->orderID = tempID;
@@ -777,6 +819,7 @@ public:
 						index->shippingAddss = tempShipping;
 						index->itemID = tempItem;
 						index->quantity = tempQuantity;
+						index->type = tempType;
 						index->status = tempStatus;
 					}
 					index = index->next;
@@ -791,7 +834,7 @@ public:
 	{
 		Order* curr = head, * index = nullptr;
 		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		string tempName, tempEmail, tempDate, tempShipping, tempType, tempStatus;
 		double tempTotal;
 
 		if (head == nullptr) {
@@ -813,6 +856,7 @@ public:
 						tempShipping = curr->shippingAddss;
 						tempItem = curr->itemID;
 						tempQuantity = curr->quantity;
+						tempType = curr->type;
 						tempStatus = curr->status;
 
 						curr->orderID = index->orderID;
@@ -823,6 +867,7 @@ public:
 						curr->shippingAddss = index->shippingAddss;
 						curr->itemID = index->itemID;
 						curr->quantity = index->quantity;
+						curr->type = index->type;
 						curr->status = index->status;
 
 						index->orderID = tempID;
@@ -833,6 +878,7 @@ public:
 						index->shippingAddss = tempShipping;
 						index->itemID = tempItem;
 						index->quantity = tempQuantity;
+						index->type = tempType;
 						index->status = tempStatus;
 					}
 					index = index->next;
@@ -847,7 +893,7 @@ public:
 	{
 		Order* curr = head, * index = nullptr;
 		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		string tempName, tempEmail, tempDate, tempShipping, tempType, tempStatus;
 		double tempTotal;
 
 		if (head == nullptr) {
@@ -882,6 +928,7 @@ public:
 						tempShipping = curr->shippingAddss;
 						tempItem = curr->itemID;
 						tempQuantity = curr->quantity;
+						tempType = curr->type;
 						tempStatus = curr->status;
 
 						curr->orderID = index->orderID;
@@ -892,6 +939,7 @@ public:
 						curr->shippingAddss = index->shippingAddss;
 						curr->itemID = index->itemID;
 						curr->quantity = index->quantity;
+						curr->type = index->type;
 						curr->status = index->status;
 
 						index->orderID = tempID;
@@ -902,6 +950,7 @@ public:
 						index->shippingAddss = tempShipping;
 						index->itemID = tempItem;
 						index->quantity = tempQuantity;
+						index->type = tempType;
 						index->status = tempStatus;
 					}
 					index = index->next;
@@ -916,7 +965,7 @@ public:
 	{
 		Order* curr = head, * index = nullptr;
 		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		string tempName, tempEmail, tempDate, tempShipping, tempType, tempStatus;
 		double tempTotal;
 
 		if (head == nullptr) {
@@ -951,6 +1000,7 @@ public:
 						tempShipping = curr->shippingAddss;
 						tempItem = curr->itemID;
 						tempQuantity = curr->quantity;
+						tempType = curr->type;
 						tempStatus = curr->status;
 
 						curr->orderID = index->orderID;
@@ -961,6 +1011,7 @@ public:
 						curr->shippingAddss = index->shippingAddss;
 						curr->itemID = index->itemID;
 						curr->quantity = index->quantity;
+						curr->type = index->type;
 						curr->status = index->status;
 
 						index->orderID = tempID;
@@ -971,6 +1022,7 @@ public:
 						index->shippingAddss = tempShipping;
 						index->itemID = tempItem;
 						index->quantity = tempQuantity;
+						index->type = tempType;
 						index->status = tempStatus;
 					}
 					index = index->next;
@@ -985,7 +1037,7 @@ public:
 	{
 		Order* curr = head, * index = nullptr;
 		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		string tempName, tempEmail, tempDate, tempShipping, tempType, tempStatus;
 		double tempTotal;
 
 		if (head == nullptr) {
@@ -1007,6 +1059,7 @@ public:
 						tempShipping = curr->shippingAddss;
 						tempItem = curr->itemID;
 						tempQuantity = curr->quantity;
+						tempType = curr->type;
 						tempStatus = curr->status;
 
 						curr->orderID = index->orderID;
@@ -1017,6 +1070,7 @@ public:
 						curr->shippingAddss = index->shippingAddss;
 						curr->itemID = index->itemID;
 						curr->quantity = index->quantity;
+						curr->type = index->type;
 						curr->status = index->status;
 
 						index->orderID = tempID;
@@ -1027,6 +1081,7 @@ public:
 						index->shippingAddss = tempShipping;
 						index->itemID = tempItem;
 						index->quantity = tempQuantity;
+						index->type = tempType;
 						index->status = tempStatus;
 					}
 					index = index->next;
@@ -1041,7 +1096,7 @@ public:
 	{
 		Order* curr = head, * index = nullptr;
 		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
+		string tempName, tempEmail, tempDate, tempShipping, tempType, tempStatus;
 		double tempTotal;
 
 		if (head == nullptr) {
@@ -1063,6 +1118,7 @@ public:
 						tempShipping = curr->shippingAddss;
 						tempItem = curr->itemID;
 						tempQuantity = curr->quantity;
+						tempType = curr->type;
 						tempStatus = curr->status;
 
 						curr->orderID = index->orderID;
@@ -1073,6 +1129,7 @@ public:
 						curr->shippingAddss = index->shippingAddss;
 						curr->itemID = index->itemID;
 						curr->quantity = index->quantity;
+						curr->type = index->type;
 						curr->status = index->status;
 
 						index->orderID = tempID;
@@ -1083,6 +1140,7 @@ public:
 						index->shippingAddss = tempShipping;
 						index->itemID = tempItem;
 						index->quantity = tempQuantity;
+						index->type = tempType;
 						index->status = tempStatus;
 					}
 					index = index->next;

@@ -62,5 +62,5 @@ inline int validateUser(user user[]) {
 			} while (next != 'y' && next != 'n');
 		}
 	} while (next == 'y');
-	return -1;
+	exit(0);
 }

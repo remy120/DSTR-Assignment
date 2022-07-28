@@ -196,20 +196,59 @@ void runPOSystem(int role)
 			break;
 			case 6:
 			{
-				//aya generate report code here
+				cout << "1) View completed orders" << endl;
+				cout << "2) View pending orders" << endl;
+				cout << "3) View canceled orders" << endl;
+				cout << "4) Total Revenue" << endl;
+
+				switch (checkChoiceInt()) {
+				case 1:
+				{
+					order.generateReport(1);
+				}
+				break;
+
+				case 2:
+				{
+					order.generateReport(2);
+				}
+				break;
+
+				case 3:
+				{
+					order.generateReport(3);
+				}
+				break;
+
+				case 4:
+				{
+					order.generateReport(4);
+				}
+				break;
+
+				default:
+				{
+					cout << "Invalid option!" << endl;
+				}
+				break;
+				}
 			}
 			break;
 			case 7:
 			{
-				cout << "1) Sort newest orders" << endl;
-				cout << "2) Sort oldest orders" << endl;
-				cout << "3) Sort popular item orders" << endl;
+				cout << "1) Report for newest orders" << endl;
+				cout << "2) Report for oldest orders" << endl;
 
 				switch (checkChoiceInt())
 				{
 					case 1:
 					{
-						
+						order.sortReportByNewest();
+					}
+					break;
+					case 2:
+					{
+						order.sortReportByOldest();
 					}
 					break;
 					default:
@@ -232,7 +271,8 @@ void runPOSystem(int role)
 			break;
 			case 77:
 			{
-				//aya display original list code here
+				cout << "--- DISPLAYING ORIGINAL UNSORTED ORDERS ---" << endl;
+				order.showAll();
 			}
 			break;
 			case 88:

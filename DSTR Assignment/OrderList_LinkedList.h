@@ -14,7 +14,7 @@ using namespace std;
 //check if choice input is integer
 inline int checkChoiceInt() {
 	string checkint;
-	int count;
+	int count=0;
 	do {
 		cout << "\nChoice?" << endl;
 		cin >> checkint;
@@ -43,118 +43,118 @@ inline int checkChoiceInt() {
 	} while (count != 0);
 }
 
-inline void generateHardCodedOrder(hardCodedOrder* hardCodedOrder) {
-	hardCodedOrder[0].horderID = 1;
-	hardCodedOrder[0].hbuyerName = "Hayden Emmett";
-	hardCodedOrder[0].hbuyerEmail = "haydenE@mail.com";
-	hardCodedOrder[0].horderDate = "2021/04/09";
-	hardCodedOrder[0].htotal = 394.80;
-	hardCodedOrder[0].hshippingAddss = "Penrissen Batu 7 Kuching";
-	hardCodedOrder[0].hitemID = 1;
+inline void generateHardCodedOrder(Order* hardCodedOrder) {
+	hardCodedOrder[0].orderID = 1;
+	hardCodedOrder[0].buyerName = "Hayden Emmett";
+	hardCodedOrder[0].buyerEmail = "haydenE@mail.com";
+	hardCodedOrder[0].orderDate = "2021/04/09";
+	hardCodedOrder[0].total = 394.80;
+	hardCodedOrder[0].shippingAddss = "Penrissen Batu 7 Kuching";
+	hardCodedOrder[0].itemID = 1;
 	//hardCodedOrder[0].hitemID.push_back(5);
 	//hardCodedOrder[0].hitemID.push_back(7);
-	hardCodedOrder[0].hquantity =3;
+	hardCodedOrder[0].quantity =3;
 	//hardCodedOrder[0].hquantity.push_back(5);
 	//hardCodedOrder[0].hquantity.push_back(2);
-	hardCodedOrder[0].hstatus = "Completed";
+	hardCodedOrder[0].status = "Completed";
 
-	hardCodedOrder[1].horderID = 3;
-	hardCodedOrder[1].hbuyerName = "Ira Prudence";
-	hardCodedOrder[1].hbuyerEmail = "prudenceI@mail.com";
-	hardCodedOrder[1].horderDate = "2021/08/04";
-	hardCodedOrder[1].htotal = 373.70;
-	hardCodedOrder[1].hshippingAddss = "Sek Memandu Kenderaan";
-	hardCodedOrder[1].hitemID = 2;
+	hardCodedOrder[1].orderID = 3;
+	hardCodedOrder[1].buyerName = "Ira Prudence";
+	hardCodedOrder[1].buyerEmail = "prudenceI@mail.com";
+	hardCodedOrder[1].orderDate = "2021/08/04";
+	hardCodedOrder[1].total = 373.70;
+	hardCodedOrder[1].shippingAddss = "Sek Memandu Kenderaan";
+	hardCodedOrder[1].itemID = 2;
 	//hardCodedOrder[1].hitemID.push_back(4);
 	//hardCodedOrder[1].hitemID.push_back(6);
-	hardCodedOrder[1].hquantity = 4;
+	hardCodedOrder[1].quantity = 4;
 	//hardCodedOrder[1].hquantity.push_back(8);
 	//hardCodedOrder[1].hquantity.push_back(6);
-	hardCodedOrder[1].hstatus = "Completed";
+	hardCodedOrder[1].status = "Completed";
 
-	hardCodedOrder[2].horderID = 5;
-	hardCodedOrder[2].hbuyerName = "Michael Zandra";
-	hardCodedOrder[2].hbuyerEmail = "michelleZ@mail.com";
-	hardCodedOrder[2].horderDate = "2022/01/16";
-	hardCodedOrder[2].htotal = 57;
-	hardCodedOrder[2].hshippingAddss = "No.87, Medan Sepadu";
-	hardCodedOrder[2].hitemID = 9;
+	hardCodedOrder[2].orderID = 5;
+	hardCodedOrder[2].buyerName = "Michael Zandra";
+	hardCodedOrder[2].buyerEmail = "michelleZ@mail.com";
+	hardCodedOrder[2].orderDate = "2022/01/16";
+	hardCodedOrder[2].total = 57;
+	hardCodedOrder[2].shippingAddss = "No.87, Medan Sepadu";
+	hardCodedOrder[2].itemID = 9;
 	//hardCodedOrder[2].hitemID.push_back(10);
 	//hardCodedOrder[2].hitemID.push_back(3);
-	hardCodedOrder[2].hquantity = 1;
+	hardCodedOrder[2].quantity = 1;
 	//hardCodedOrder[2].hquantity.push_back(2);
 	//hardCodedOrder[2].hquantity.push_back(2);
-	hardCodedOrder[2].hstatus = "Completed";
+	hardCodedOrder[2].status = "Completed";
 
-	hardCodedOrder[3].horderID = 6;
-	hardCodedOrder[3].hbuyerName = "Ethelyn Jane";
-	hardCodedOrder[3].hbuyerEmail = "ethelynJ@mail.com";
-	hardCodedOrder[3].horderDate = "2022/04/08";
-	hardCodedOrder[3].htotal = 394.80;
-	hardCodedOrder[3].hshippingAddss = "OUG Parklane Block D";
-	hardCodedOrder[3].hitemID = 1;
+	hardCodedOrder[3].orderID = 6;
+	hardCodedOrder[3].buyerName = "Ethelyn Jane";
+	hardCodedOrder[3].buyerEmail = "ethelynJ@mail.com";
+	hardCodedOrder[3].orderDate = "2022/04/08";
+	hardCodedOrder[3].total = 394.80;
+	hardCodedOrder[3].shippingAddss = "OUG Parklane Block D";
+	hardCodedOrder[3].itemID = 1;
 	//hardCodedOrder[3].hitemID.push_back(5);
 	//hardCodedOrder[3].hitemID.push_back(7);
-	hardCodedOrder[3].hquantity = 3;
+	hardCodedOrder[3].quantity = 3;
 	//hardCodedOrder[3].hquantity.push_back(5);
 	//hardCodedOrder[3].hquantity.push_back(2);
-	hardCodedOrder[3].hstatus = "Cancelled";
+	hardCodedOrder[3].status = "Cancelled";
 
-	hardCodedOrder[4].horderID = 2;
-	hardCodedOrder[4].hbuyerName = "Darnell Axel";
-	hardCodedOrder[4].hbuyerEmail = "darnellA@mail.com";
-	hardCodedOrder[4].horderDate = "2021/07/04";
-	hardCodedOrder[4].htotal = 373.70;
-	hardCodedOrder[4].hshippingAddss = "Pavillion Bukit Jalil";
-	hardCodedOrder[4].hitemID = 2;
+	hardCodedOrder[4].orderID = 2;
+	hardCodedOrder[4].buyerName = "Darnell Axel";
+	hardCodedOrder[4].buyerEmail = "darnellA@mail.com";
+	hardCodedOrder[4].orderDate = "2021/07/04";
+	hardCodedOrder[4].total = 373.70;
+	hardCodedOrder[4].shippingAddss = "Pavillion Bukit Jalil";
+	hardCodedOrder[4].itemID = 2;
 	//hardCodedOrder[4].hitemID.push_back(4);
 	//hardCodedOrder[4].hitemID.push_back(6);
-	hardCodedOrder[4].hquantity = 4;
+	hardCodedOrder[4].quantity = 4;
 	//hardCodedOrder[4].hquantity.push_back(8);
 	//hardCodedOrder[4].hquantity.push_back(6);
-	hardCodedOrder[4].hstatus = "Pending";
+	hardCodedOrder[4].status = "Pending";
 
-	hardCodedOrder[5].horderID = 7;
-	hardCodedOrder[5].hbuyerName = "Lavena Ping";
-	hardCodedOrder[5].hbuyerEmail = "lavenaP@mail.com";
-	hardCodedOrder[5].horderDate = "2022/05/25";
-	hardCodedOrder[5].htotal = 57;
-	hardCodedOrder[5].hshippingAddss = "Taman Teknologi Malaysia";
-	hardCodedOrder[5].hitemID = 9;
+	hardCodedOrder[5].orderID = 7;
+	hardCodedOrder[5].buyerName = "Lavena Ping";
+	hardCodedOrder[5].buyerEmail = "lavenaP@mail.com";
+	hardCodedOrder[5].orderDate = "2022/05/25";
+	hardCodedOrder[5].total = 57;
+	hardCodedOrder[5].shippingAddss = "Taman Teknologi Malaysia";
+	hardCodedOrder[5].itemID = 9;
 	//hardCodedOrder[5].hitemID.push_back(10);
 	//hardCodedOrder[5].hitemID.push_back(3);
-	hardCodedOrder[5].hquantity = 1;
+	hardCodedOrder[5].quantity = 1;
 	//hardCodedOrder[5].hquantity.push_back(2);
 	//hardCodedOrder[5].hquantity.push_back(2);
-	hardCodedOrder[5].hstatus = "Pending";
+	hardCodedOrder[5].status = "Pending";
 
-	hardCodedOrder[6].horderID = 4;
-	hardCodedOrder[6].hbuyerName = "Marlee Sherri";
-	hardCodedOrder[6].hbuyerEmail = "marleeS@mail.com";
-	hardCodedOrder[6].horderDate = "2021/08/04";
-	hardCodedOrder[6].htotal = 373.70;
-	hardCodedOrder[6].hshippingAddss = "Taman Bukit Damansara";
-	hardCodedOrder[6].hitemID = 2;
+	hardCodedOrder[6].orderID = 4;
+	hardCodedOrder[6].buyerName = "Marlee Sherri";
+	hardCodedOrder[6].buyerEmail = "marleeS@mail.com";
+	hardCodedOrder[6].orderDate = "2021/08/04";
+	hardCodedOrder[6].total = 373.70;
+	hardCodedOrder[6].shippingAddss = "Taman Bukit Damansara";
+	hardCodedOrder[6].itemID = 2;
 	//hardCodedOrder[6].hitemID.push_back(4);
 	//hardCodedOrder[6].hitemID.push_back(6);
-	hardCodedOrder[6].hquantity = 4;
+	hardCodedOrder[6].quantity = 4;
 	//hardCodedOrder[6].hquantity.push_back(8);
 	//hardCodedOrder[6].hquantity.push_back(6);
-	hardCodedOrder[6].hstatus = "Pending";
+	hardCodedOrder[6].status = "Pending";
 
-	hardCodedOrder[7].horderID = 8;
-	hardCodedOrder[7].hbuyerName = "Drea Polly";
-	hardCodedOrder[7].hbuyerEmail = "dreaP@mail.com";
-	hardCodedOrder[7].horderDate = "2022/05/27";
-	hardCodedOrder[7].htotal = 57;
-	hardCodedOrder[7].hshippingAddss = "D-24 Muasang King Farm";
-	hardCodedOrder[7].hitemID = 9;
+	hardCodedOrder[7].orderID = 8;
+	hardCodedOrder[7].buyerName = "Drea Polly";
+	hardCodedOrder[7].buyerEmail = "dreaP@mail.com";
+	hardCodedOrder[7].orderDate = "2022/05/27";
+	hardCodedOrder[7].total = 57;
+	hardCodedOrder[7].shippingAddss = "D-24 Muasang King Farm";
+	hardCodedOrder[7].itemID = 9;
 	//hardCodedOrder[7].hitemID.push_back(10);
 	//hardCodedOrder[7].hitemID.push_back(3);
-	hardCodedOrder[7].hquantity = 1;
+	hardCodedOrder[7].quantity = 1;
 	//hardCodedOrder[7].hquantity.push_back(2);
 	//hardCodedOrder[7].hquantity.push_back(2);
-	hardCodedOrder[7].hstatus = "Pending";
+	hardCodedOrder[7].status = "Pending";
 }
 
 class OrderList
@@ -205,18 +205,18 @@ public:
 		}
 	}
 
-	void getOrdrFromArray(hardCodedOrder hardCodedOrder[]) {
+	void getOrdrFromArray(Order hardCodedOrder[]) {
 		for (int i = 0; i < sizeof(hardCodedOrder); i++) {
 			Order* newNode = new Order;
-			newNode->orderID = hardCodedOrder[i].horderID;
-			newNode->buyerName = hardCodedOrder[i].hbuyerName;
-			newNode->buyerEmail = hardCodedOrder[i].hbuyerEmail;
-			newNode->orderDate = hardCodedOrder[i].horderDate;
-			newNode->total = hardCodedOrder[i].htotal;
-			newNode->shippingAddss = hardCodedOrder[i].hshippingAddss;
-			newNode->itemID = hardCodedOrder[i].horderID;
-			newNode->quantity = hardCodedOrder[i].hquantity;
-			newNode->status = hardCodedOrder[i].hstatus;
+			newNode->orderID = hardCodedOrder[i].orderID;
+			newNode->buyerName = hardCodedOrder[i].buyerName;
+			newNode->buyerEmail = hardCodedOrder[i].buyerEmail;
+			newNode->orderDate = hardCodedOrder[i].orderDate;
+			newNode->total = hardCodedOrder[i].total;
+			newNode->shippingAddss = hardCodedOrder[i].shippingAddss;
+			newNode->itemID = hardCodedOrder[i].orderID;
+			newNode->quantity = hardCodedOrder[i].quantity;
+			newNode->status = hardCodedOrder[i].status;
 			//for (int x = 0; x < sizeof(hardCodedOrder[i].horderID); x++) {
 			//	newNode->itemID.push_back(hardCodedOrder[i].horderID);
 			//};
@@ -521,9 +521,6 @@ public:
 	void editData(int chosenID, int chosenCol, string newData)
 	{
 		Order* curr = head, * index = nullptr;
-		int tempID, tempItem, tempQuantity;
-		string tempName, tempEmail, tempDate, tempShipping, tempStatus;
-		double tempTotal;
 
 		if (head == nullptr) {
 			return;
@@ -580,7 +577,7 @@ public:
 				case 7:
 				{
 					if (stoi(newData)) {
-						curr->itemID = stod(newData);
+						curr->itemID = stoi(newData);
 					}
 					else {
 						cout << "New data is invalid";
@@ -590,7 +587,7 @@ public:
 				case 8:
 				{
 					if (stoi(newData)) {
-						curr->quantity = stod(newData);
+						curr->quantity = stoi(newData);
 					}
 					else {
 						cout << "New data is invalid";

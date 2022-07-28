@@ -162,6 +162,7 @@ class OrderList
 public:
 	Order* head;
 	int size;
+	string value[10];
 
 	OrderList()
 	{
@@ -170,6 +171,39 @@ public:
 	}
 
 public:
+
+	// length of the string  
+	//Reference from https://www.javatpoint.com/how-to-split-strings-in-cpp
+	inline int len(string str)
+	{
+		int length = 0;
+		for (int i = 0; str[i] != '\0'; i++)
+		{
+			length++;
+		}
+		return length;
+	}
+
+	//create custom split() function  
+	//Reference from https://www.javatpoint.com/how-to-split-strings-in-cpp
+	inline void split(string str, char seperator)
+	{
+		int currIndex = 0, i = 0;
+		int startIndex = 0, endIndex = 0;
+		while (i <= len(str))
+		{
+			if (str[i] == seperator || i == len(str))
+			{
+				endIndex = i;
+				string subStr = "";
+				subStr.append(str, startIndex, endIndex - startIndex);
+				value[currIndex] = subStr;
+				currIndex += 1;
+				startIndex = endIndex + 1;
+			}
+			i++;
+		}
+	}
 
 	void getOrdrFromArray(hardCodedOrder hardCodedOrder[]) {
 		for (int i = 0; i < sizeof(hardCodedOrder); i++) {
@@ -329,7 +363,6 @@ public:
 		}
 	}
 
-
 	//get linkedlist size
 	int getSize()
 	{
@@ -351,6 +384,86 @@ public:
 		{
 			cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
 			curr = curr->next;
+		}
+	}
+
+	void generateReport(int statusId)
+	{
+		Order* curr = head;
+		double sum = 0;
+		
+		if (head == nullptr) {
+			cout << "List is empty" << endl;
+			return;
+		}
+
+		// Completed Status
+		if (statusId == 1) {
+			cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+			while (curr != nullptr)
+			{
+				if (curr->status == "Completed") {
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+					curr = curr->next;
+				}
+				else {
+					curr = curr->next;
+				}
+			}
+		}
+
+		if (statusId == 2) {
+			cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+			while (curr != nullptr)
+			{
+				if (curr->status == "Pending") {
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+					curr = curr->next;
+				}
+				else {
+					curr = curr->next;
+				}
+			}
+		}
+
+		if (statusId == 3) {
+			cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+			while (curr != nullptr)
+			{
+				if (curr->status == "Cancelled") {
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+					curr = curr->next;
+				}
+				else {
+					curr = curr->next;
+				}
+			}
+		}
+
+		if (statusId == 4) {
+			int year;
+			cout << "Input a year (eg. 2022)";
+			year = checkChoiceInt();
+
+			cout << "--- " << year << " ORDERS --- " << endl;
+			cout << "ID	|Buyer		|Order Date	|Total		|ItemID	|Quantity	|Status" << endl;
+			while (curr != nullptr)
+			{
+				char seperator = '/'; 
+				split(curr->orderDate, seperator);
+
+				if (value[0] == to_string(year) && curr->status != "Cancelled") {
+					cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->itemID << "	 " << curr->quantity << "		 " << curr->status << endl;
+
+					sum += curr->total;
+					curr = curr->next;
+				}
+				else {
+					curr = curr->next;
+				}
+			}
+
+			cout << "Total Revenue is RM" << sum << endl;
 		}
 	}
 
@@ -1085,6 +1198,78 @@ public:
 				}
 				curr = curr->next;
 			}
+		}
+	}
+
+	void sortReportByNewest()
+	{
+		cout << "--- SORT REPORT BY NEWEST ---" << endl;
+		cout << "1) Completed" << endl;
+		cout << "2) Pending" << endl;
+		cout << "3) Cancelled" << endl;
+
+		switch (checkChoiceInt())
+		{
+		case 1:
+		{
+			cout << "--- SORT COMPLETED REPORT BY NEWEST ---" << endl;
+			sortOrderDateDesc();
+			generateReport(1);
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT PENDING REPORT BY NEWEST ---" << endl;
+			sortOrderDateDesc();
+			generateReport(2);
+		}
+		break;
+		case 3:
+		{
+			cout << "--- SORT CANCELLED REPORT BY NEWEST ---" << endl;
+			sortOrderDateDesc();
+			generateReport(3);
+		}
+		break;
+		default:
+			cout << "LOG: Invalid option!" << endl;
+			break;
+		}
+	}
+
+	void sortReportByOldest()
+	{
+		cout << "--- SORT REPORT BY OLDEST ---" << endl;
+		cout << "1) Completed" << endl;
+		cout << "2) Pending" << endl;
+		cout << "3) Cancelled" << endl;
+
+		switch (checkChoiceInt())
+		{
+		case 1:
+		{
+			cout << "--- SORT COMPLETED REPORT BY OLDEST ---" << endl;
+			sortOrderDateAsc();
+			generateReport(1);
+		}
+		break;
+		case 2:
+		{
+			cout << "--- SORT PENDING REPORT BY OLDEST ---" << endl;
+			sortOrderDateAsc();
+			generateReport(2);
+		}
+		break;
+		case 3:
+		{
+			cout << "--- SORT CANCELLED REPORT BY OLDEST ---" << endl;
+			sortOrderDateAsc();
+			generateReport(3);
+		}
+		break;
+		default:
+			cout << "LOG: Invalid option!" << endl;
+			break;
 		}
 	}
 

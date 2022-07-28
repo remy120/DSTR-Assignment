@@ -34,7 +34,7 @@ void runPOSystem(int role)
 		cout << endl;
 
 		if (!added) {
-			cout << "66) Add hardcoded orders" << endl;
+			cout << "77) Add hardcoded orders" << endl;
 		}
 		cout << "88) Show current orders" << endl;
 		cout << "99) Logout and Exit" << endl;
@@ -50,6 +50,11 @@ void runPOSystem(int role)
 			{
 				cout << "1) Search order by id" << endl;
 				cout << "2) Search order by position in linked list" << endl;
+				cout << "3) Search order by buyer name" << endl;
+				cout << "4) Search order by buyer email" << endl;
+				cout << "5) Search order by date" << endl;
+				cout << "6) Search order by year" << endl;
+				cout << "7) Search order by month and year" << endl;
 
 				switch (checkChoiceInt())
 				{
@@ -69,6 +74,58 @@ void runPOSystem(int role)
 						cout << "Position: ";
 						cin >> pos;
 						order.showSpecific(pos);
+					}
+					break;
+					case 3:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string bName;
+						cout << "--- SEARCH ORDER BY BUYER NAME ---" << endl;
+						cout << "Buyer name: ";
+						getline(cin, bName);
+						order.searchOrderbyName(bName);
+					}
+					break;
+					case 4:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string bMail;
+						cout << "--- SEARCH ORDER BY BUYER EMAIL ---" << endl;
+						cout << "Buyer email: ";
+						getline(cin, bMail);
+						order.searchOrderbyEmail(bMail);
+					}
+					break;
+					case 5:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string oDate;
+						cout << "--- SEARCH ORDER BY DATE ---" << endl;
+						cout << "Date (yyyy/mm/dd): ";
+						getline(cin, oDate);
+						order.searchOrderbyDate(oDate);
+					}
+					break;
+					case 6:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string oYear;
+						cout << "--- SEARCH ORDER BY YEAR ---" << endl;
+						cout << "Year (yyyy): ";
+						getline(cin, oYear);
+						order.searchOrderbyYear(oYear);
+					}
+					break;
+					case 7:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string oYear, oMonth;
+						cout << "--- SEARCH ORDER BY MONTH AND YEAR ---" << endl;
+						cout << "Year (yyyy): ";
+						getline(cin, oYear);
+						cout << "Month (mm): ";
+						getline(cin, oMonth);
+						order.searchOrderbyMonthYear(oYear, oMonth);
 					}
 					break;
 					default:
@@ -288,7 +345,7 @@ void runPOSystem(int role)
 				}
 			}
 			break;
-			case 66:
+			case 77:
 			{
 				cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
 				Order hardOrder[8];

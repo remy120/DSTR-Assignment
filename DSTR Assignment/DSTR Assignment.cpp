@@ -25,17 +25,17 @@ void runPOSystem(int role)
 		cout << "3) Sort Order" << endl;
 		cout << "4) Edit Order" << endl;
 		cout << "5) Delete Order" << endl;
-
+		cout << "6) View Pending orders" << endl;
+		
 		if (role == 1) {
-			cout << "6) Generate Report" << endl;
-			cout << "7) Sort Report" << endl;
+			cout << "7) Generate Report" << endl;
+			cout << "8) Sort Report" << endl;
 		}
 		cout << endl;
 
 		if (!added) {
-			cout << "66) Add hardcoded orders" << endl;
+			cout << "77) Add hardcoded orders" << endl;
 		}
-		cout << "77) Display original unsorted orders" << endl;
 		cout << "88) Show current orders" << endl;
 		cout << "99) Logout and Exit" << endl;
 
@@ -50,6 +50,11 @@ void runPOSystem(int role)
 			{
 				cout << "1) Search order by id" << endl;
 				cout << "2) Search order by position in linked list" << endl;
+				cout << "3) Search order by buyer name" << endl;
+				cout << "4) Search order by buyer email" << endl;
+				cout << "5) Search order by date" << endl;
+				cout << "6) Search order by year" << endl;
+				cout << "7) Search order by month and year" << endl;
 
 				switch (checkChoiceInt())
 				{
@@ -69,6 +74,58 @@ void runPOSystem(int role)
 						cout << "Position: ";
 						cin >> pos;
 						order.showSpecific(pos);
+					}
+					break;
+					case 3:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string bName;
+						cout << "--- SEARCH ORDER BY BUYER NAME ---" << endl;
+						cout << "Buyer name: ";
+						getline(cin, bName);
+						order.searchOrderbyName(bName);
+					}
+					break;
+					case 4:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string bMail;
+						cout << "--- SEARCH ORDER BY BUYER EMAIL ---" << endl;
+						cout << "Buyer email: ";
+						getline(cin, bMail);
+						order.searchOrderbyEmail(bMail);
+					}
+					break;
+					case 5:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string oDate;
+						cout << "--- SEARCH ORDER BY DATE ---" << endl;
+						cout << "Date (yyyy/mm/dd): ";
+						getline(cin, oDate);
+						order.searchOrderbyDate(oDate);
+					}
+					break;
+					case 6:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string oYear;
+						cout << "--- SEARCH ORDER BY YEAR ---" << endl;
+						cout << "Year (yyyy): ";
+						getline(cin, oYear);
+						order.searchOrderbyYear(oYear);
+					}
+					break;
+					case 7:
+					{
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						string oYear, oMonth;
+						cout << "--- SEARCH ORDER BY MONTH AND YEAR ---" << endl;
+						cout << "Year (yyyy): ";
+						getline(cin, oYear);
+						cout << "Month (mm): ";
+						getline(cin, oMonth);
+						order.searchOrderbyMonthYear(oYear, oMonth);
 					}
 					break;
 					default:
@@ -196,6 +253,35 @@ void runPOSystem(int role)
 			break;
 			case 6:
 			{
+				char decision;
+				int chosenID, chosenCol = 0;
+				string newType;
+				order.generateReport(2);
+
+				do {
+					cout << "Modify Pending Order Type? (y/n)" << endl;
+					cin >> decision;
+
+					if (decision == 'y') {
+						cout << "Please provide order ID: ";
+						cin >> chosenID;
+						while (cin.fail()) {
+							cout << "Please input order ID only" << std::endl;
+							cin.clear();
+							cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+							cin >> chosenID;
+						}
+						order.searchOrderID(chosenID);
+						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+						cout << "New Type: ";
+						getline(cin, newType);
+						order.editData(chosenID, 9, newType);
+					}
+				} while (decision != 'y' && decision != 'n');
+			}
+			break;
+			case 7:
+			{
 				cout << "1) View completed orders" << endl;
 				cout << "2) View pending orders" << endl;
 				cout << "3) View canceled orders" << endl;
@@ -234,7 +320,7 @@ void runPOSystem(int role)
 				}
 			}
 			break;
-			case 7:
+			case 8:
 			{
 				cout << "1) Report for newest orders" << endl;
 				cout << "2) Report for oldest orders" << endl;
@@ -259,20 +345,14 @@ void runPOSystem(int role)
 				}
 			}
 			break;
-			case 66:
+			case 77:
 			{
 				cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
-				hardCodedOrder hardOrder[8];
+				Order hardOrder[8];
 				generateHardCodedOrder(hardOrder);
 				order.getOrdrFromArray(hardOrder);
 				order.showAll();
 				added = true;
-			}
-			break;
-			case 77:
-			{
-				cout << "--- DISPLAYING ORIGINAL UNSORTED ORDERS ---" << endl;
-				order.showAll();
 			}
 			break;
 			case 88:
@@ -302,9 +382,8 @@ void runPOSystem(int role)
 
 int main()
 {
-	user user[3];
-	userData(user);
+	user users[5];
+	userData(users);
 
-	runPOSystem(validateUser(user));
-	
+	runPOSystem(validateUser(users));
 }

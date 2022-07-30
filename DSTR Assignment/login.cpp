@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//tuple declaration
+//tuple declaration for user
 typedef tuple<int, string, string, string, int> user;
 
 //add hard coded users

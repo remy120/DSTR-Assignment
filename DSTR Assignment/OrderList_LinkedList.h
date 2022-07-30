@@ -44,9 +44,6 @@ inline int checkChoiceInt() {
 	return 0;
 }
 
-//tuple declaration for order
-typedef tuple<int, string, string, string, double, string, int, int, string, string> order;
-
 //add hard coded order
 inline vector<order> generateHardCodedOrder() {
 	vector <order> hardOrder;

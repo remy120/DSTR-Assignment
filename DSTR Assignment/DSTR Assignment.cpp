@@ -382,8 +382,9 @@ void runPOSystem(int role)
 
 int main()
 {
-	user users[5];
-	userData(users);
+	
+	vector <user> users;
+	addUser(users);
 
-	runPOSystem(validateUser(users));
+	runPOSystem(validateuser(users));
 }

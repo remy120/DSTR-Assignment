@@ -1,48 +1,21 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <tuple>
 
 using namespace std;
 
-struct user {
-	int userID;
-	string name;
-	string email;
-	string password;
-	int role;
-};
+//tuple declaration
+typedef tuple<int, string, string, string, int> user;
 
-inline void userData(user* users) {
-	users[0] = { 001,"Remy","remy@mail.com","1234",1 };
-	users[1] = { 002,"Hanns","hanns@mail.com","1234",2 };
-	users[2] = { 003,"Aya","aya@mail.com","1234",2 };
+//add hard coded users
+inline void addUser(vector<user>& userD) {
+	userD.push_back(user(001, "Administrator", "admin@mail.com", "1234", 1));
+	userD.push_back(user(002, "Sales Person", "sales@mail.com", "1234", 2));
 }
 
-//struct user users[5]
-//	= { {001,"Remy","remy@mail.com","1234",1},
-//		{002,"Hanns","hanns@mail.com","1234",2},
-//		{003,"Aya","aya@mail.com","1234",2} };
-
-//inline void userData(user* users) {
-//	users[0].userID = 001;
-//	users[0].name = "Remy";
-//	users[0].email = "remy@mail.com";
-//	users[0].password = "1234";
-//	users[0].role = 1;
-//
-//	users[1].userID = 002;
-//	users[1].name = "Hanns";
-//	users[1].email = "hanns@mail.com";
-//	users[1].password = "1234";
-//	users[1].role = 2;
-//
-//	users[2].userID = 003;
-//	users[2].name = "Aya";
-//	users[2].email = "aya@mail.com";
-//	users[2].password = "1234";
-//	users[2].role = 2;
-//}
-
-inline int validateUser(user users[]) {
+//validate user
+inline int validateuser(vector<user> userD) {
 	char next = 'n';
 	do {
 		bool flag = true;
@@ -52,14 +25,17 @@ inline int validateUser(user users[]) {
 		cout << "Enter password: ";
 		cin >> pass;
 
-		for (int i = 0; i < 5; ++i)
+		// Declaring iterator to a vector
+		vector<user>::iterator ptr;
+
+		for (user data: userD)
 		{
-			if (users[i].email == emailAddress && users[i].password == pass)
+			if (get<2>(data) == emailAddress && get<3>(data) == pass)
 			{
-				cout << "Login successfull. Welcome " << users[i].name;
+				cout << "Login successfull. Welcome " << get<1>(data);
 				flag = false;
 				next = 'n';
-				return users[i].role;
+				return get<4>(data);
 			}
 		}
 
@@ -69,7 +45,7 @@ inline int validateUser(user users[]) {
 				cout << "Try again? (y/n)." << endl;
 				cin >> next;
 			} while (next != 'y' && next != 'n');
-			
+
 		}
 
 	} while (next == 'y');

@@ -384,5 +384,5 @@ int main()
 	vector <user> users;
 	addUser(users);
 
-	runPOSystem(validateuser(users));
+	runPOSystem(validateUser(users));
 }

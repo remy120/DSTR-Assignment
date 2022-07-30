@@ -15,7 +15,7 @@ inline void addUser(vector<user>& userD) {
 }
 
 //validate user
-inline int validateuser(vector<user> userD) {
+inline int validateUser(vector<user> userD) {
 	char next = 'n';
 	do {
 		bool flag = true;

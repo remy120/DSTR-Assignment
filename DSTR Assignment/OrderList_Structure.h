@@ -21,4 +21,7 @@ struct Order {
 	Order* next;
 };
 
+//tuple declaration for order
+typedef tuple<int, string, string, string, double, string, int, int, string, string> order;
+
 #endif /* ORDERLIST_STRUCTURE_H_ */

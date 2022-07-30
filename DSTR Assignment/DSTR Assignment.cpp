@@ -7,6 +7,10 @@
 using std::cout;
 using std::cin;
 
+vector <user> users;
+bool cont = true;
+int sessionID = 0;
+
 void runPOSystem(int role)
 {
 	cout << endl;
@@ -30,14 +34,19 @@ void runPOSystem(int role)
 		if (role == 1) {
 			cout << "7) Generate Report" << endl;
 			cout << "8) Sort Report" << endl;
+			cout << "9) Show all account" << endl;
+			cout << "10) Add new account" << endl;
+			cout << "11) Delete account" << endl;
 		}
+		cout << "12) Change password" << endl;
 		cout << endl;
 
 		if (!added) {
 			cout << "77) Add hardcoded orders" << endl;
 		}
 		cout << "88) Show current orders" << endl;
-		cout << "99) Logout and Exit" << endl;
+		cout << "99) Logout" << endl;
+		cout << "999) Logout and Exit" << endl;
 
 		switch (checkChoiceInt())
 		{
@@ -345,12 +354,29 @@ void runPOSystem(int role)
 				}
 			}
 			break;
+			case 9:
+			{
+				showAllUsers(users);
+			}
+			break;
+			case 10:
+			{
+				addNewUser(users);
+			}
+			case 11:
+			{
+				delUsers(users, sessionID);
+			}
+			break;
+			case 12:
+			{
+				changePassword(users, sessionID);
+			}
+			break;
 			case 77:
 			{
 				cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
-				Order hardOrder[8];
-				generateHardCodedOrder(hardOrder);
-				order.getOrdrFromArray(hardOrder);
+				order.getOrdrFromArray(generateHardCodedOrder());
 				order.showAll();
 				added = true;
 			}
@@ -367,6 +393,12 @@ void runPOSystem(int role)
 				next = 'n';
 			}
 			break;
+			case 999:
+			{
+				next = 'n';
+				cont = false;
+			}
+			break;
 			default:
 			{
 				cout << "LOG: Invalid option!" << endl;
@@ -377,14 +409,14 @@ void runPOSystem(int role)
 	} while (next == 'y');
 
 	cout << "\nLogging out...Thank you!" << endl;
-	cout << "============================================================" << endl;
+	cout << "============================================================" << endl << endl;;
 }
 
 int main()
 {
-	
-	vector <user> users;
 	addUser(users);
 
-	runPOSystem(validateuser(users));
+	do {
+		runPOSystem(validateUser(users, sessionID));
+	} while (cont == true);
 }

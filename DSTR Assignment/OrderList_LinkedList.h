@@ -44,15 +44,19 @@ inline int checkChoiceInt() {
 	return 0;
 }
 
-inline void generateHardCodedOrder(Order* hardCodedOrder) {
-	hardCodedOrder[0] = { 1, "Hayden Emmett", "haydenE@mail.com", "2021/04/09", 394.80, "Penrissen 7 Kuching", 1, 3, "Urgent", "Completed" };
-	hardCodedOrder[1] = { 3, "Ira Prudence", "prudenceI@mail.com", "2021/08/04", 373.70, "Sek Memandu Kenderaan", 2, 4, "Normal", "Completed"};
-	hardCodedOrder[2] = { 5, "Michael Zandra", "michelleZ@mail.com", "2022/01/16", 57, "No.87, Medan Sepadu", 9, 1, "Normal", "Completed" };
-	hardCodedOrder[3] = { 6, "Ethelyn Jane", "ethelynJ@mail.com", "2022/04/08", 394.80, "OUG Parklane Block D", 1, 3, "Normal", "Cancelled" };
-	hardCodedOrder[4] = { 2, "Darnell Axel", "darnellA@mail.com", "2021/07/04", 373.7, "Pavillion Bukit Jalil", 2, 4, "Urgent", "Pending" };
-	hardCodedOrder[5] = { 7, "Lavena Ping", "lavenaP@mail.com", "2022/05/25", 57, "Taman Teknologi Malaysia", 9, 1, "Normal", "Pending" };
-	hardCodedOrder[6] = { 4, "Marlee Sherri", "marleeS@mail.com", "2021/08/04", 373.70, "Taman Bukit Damansara", 2, 4, "Urgent", "Pending"};
-	hardCodedOrder[7] = { 8, "Hayden Emmett", "haydenE@mail.com", "2022/05/27", 57, "D-24 Muasang King", 9, 1, "Normal", "Pending" };
+//add hard coded order
+inline vector<order> generateHardCodedOrder() {
+	vector <order> hardOrder;
+	hardOrder.push_back(order(1, "Hayden Emmett", "haydenE@mail.com", "2021/04/09", 394.80, "Penrissen 7 Kuching", 1, 3, "Urgent", "Completed"));
+	hardOrder.push_back(order(3, "Ira Prudence", "prudenceI@mail.com", "2021/08/04", 373.70, "Sek Memandu Kenderaan", 2, 4, "Normal", "Completed"));
+	hardOrder.push_back(order(5, "Michael Zandra", "michelleZ@mail.com", "2022/01/16", 57, "No.87, Medan Sepadu", 9, 1, "Normal", "Completed"));
+	hardOrder.push_back(order(6, "Ethelyn Jane", "ethelynJ@mail.com", "2022/04/08", 394.80, "OUG Parklane Block D", 1, 3, "Normal", "Cancelled"));
+	hardOrder.push_back(order(2, "Darnell Axel", "darnellA@mail.com", "2021/07/04", 373.7, "Pavillion Bukit Jalil", 2, 4, "Urgent", "Pending"));
+	hardOrder.push_back(order(7, "Lavena Ping", "lavenaP@mail.com", "2022/05/25", 57, "Taman Teknologi Malaysia", 9, 1, "Normal", "Pending"));
+	hardOrder.push_back(order(4, "Marlee Sherri", "marleeS@mail.com", "2021/08/04", 373.70, "Taman Bukit Damansara", 2, 4, "Urgent", "Pending"));
+	hardOrder.push_back(order(8, "Hayden Emmett", "haydenE@mail.com", "2022/05/27", 57, "D-24 Muasang King", 9, 1, "Normal", "Pending"));
+
+	return hardOrder;
 }
 
 class OrderList
@@ -169,19 +173,19 @@ public:
 	}
 
 	//Insert hardcoded orders
-	void getOrdrFromArray(Order hardCodedOrder[]) {
-		for (int i = 0; i < sizeof(hardCodedOrder); i++) {
+	void getOrdrFromArray(vector<order> orderD) {
+		for (order data : orderD) {
 			Order* newNode = new Order;
-			newNode->orderID = hardCodedOrder[i].orderID;
-			newNode->buyerName = hardCodedOrder[i].buyerName;
-			newNode->buyerEmail = hardCodedOrder[i].buyerEmail;
-			newNode->orderDate = hardCodedOrder[i].orderDate;
-			newNode->total = hardCodedOrder[i].total;
-			newNode->shippingAddss = hardCodedOrder[i].shippingAddss;
-			newNode->itemID = hardCodedOrder[i].orderID;
-			newNode->quantity = hardCodedOrder[i].quantity;
-			newNode->type = hardCodedOrder[i].type;
-			newNode->status = hardCodedOrder[i].status;
+			newNode->orderID = get<0>(data);
+			newNode->buyerName = get<1>(data);
+			newNode->buyerEmail = get<2>(data);
+			newNode->orderDate = get<3>(data);
+			newNode->total = get<4>(data);
+			newNode->shippingAddss = get<5>(data);
+			newNode->itemID = get<6>(data);
+			newNode->quantity = get<7>(data);
+			newNode->type = get<8>(data);
+			newNode->status = get<9>(data);
 
 			newNode->next = nullptr;
 

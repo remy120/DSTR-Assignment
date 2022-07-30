@@ -348,9 +348,7 @@ void runPOSystem(int role)
 			case 77:
 			{
 				cout << "--- ADDING HARDCODED(ONLINE) ORDERS ---" << endl;
-				Order hardOrder[8];
-				generateHardCodedOrder(hardOrder);
-				order.getOrdrFromArray(hardOrder);
+				order.getOrdrFromArray(generateHardCodedOrder());
 				order.showAll();
 				added = true;
 			}

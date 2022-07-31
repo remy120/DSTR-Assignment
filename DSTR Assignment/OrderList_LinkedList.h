@@ -675,8 +675,7 @@ public:
 	}
 
 	//update order detail
-	void editData(int chosenID, int chosenCol, string newData)
-	{
+	void updateData(int chosenID, int chosenCol, string newData) {
 		Order* curr = head, * index = nullptr;
 
 		if (head == nullptr) {
@@ -696,7 +695,7 @@ public:
 					try {
 						curr->orderID = stoi(newData);
 					}
-					catch(...) {
+					catch (...) {
 						cout << "New data is invalid" << endl;
 					}
 				}
@@ -718,7 +717,7 @@ public:
 				break;
 				case 5:
 				{
-					try{
+					try {
 						curr->total = stod(newData);
 					}
 					catch (...) {
@@ -769,8 +768,48 @@ public:
 				break;
 				}
 			}
-			
+
 		}
+	}
+
+	//edit order detail
+	void editData()
+	{
+		int chosenID, chosenCol = 0;
+		string newData;
+		bool validID = true, validCol = true;
+		showAll();
+		do {
+			cout << "Provide order ID of the order that wanted to edit: ";
+			cin >> chosenID;
+			validID = true;
+			if (cin.fail()) {
+				cout << "Please input order ID only" << endl;
+				cin.clear();
+				cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+				validID = false;
+			}
+		} while (validID == false);
+		
+		showSpecific(searchOrderID(chosenID));
+		do {
+			cout << "Which column do you want to edit (Column number eg. 2)? ";
+			cin >> chosenCol;
+			validCol = true;
+			if (cin.fail()) {
+				cout << "Please input column number only" << std::endl;
+				cin.clear();
+				cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+				validCol = false;
+			}
+			cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+		} while (validCol == false);
+		
+		cout << "Insert new data: ";
+		getline(cin, newData);
+
+		updateData(chosenID, chosenCol, newData);
+		
 	}
 
 	//sort by ID

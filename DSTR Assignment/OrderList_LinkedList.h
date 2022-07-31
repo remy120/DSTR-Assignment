@@ -564,6 +564,7 @@ public:
 	void insertNewOrder()
 	{
 		int amount = 0;
+		Order* curr = head;
 		//asking for number of orders will be inserted at once
 		cout << "How many orders? " << endl;
 		if (amount = checkChoiceInt()) {
@@ -571,26 +572,86 @@ public:
 
 			for (int i = 0; i < amount; ++i)
 			{
+				bool validID = true, validItem = true, validQuantity = true, validTotal = true;
 				string oID, name, email, date, total, shipping, item, quantity;
+				double tempTotal;
+				int tempID, tempItem, tempQuantity;
 				cout << "\n--- ENTER ORDER ID #" << (i + 1) << "---" << endl << endl;
-				cout << "Order ID= ";
-				getline(cin, oID);
+				do {
+					cout << "Order ID= ";
+					getline(cin, oID);
+					while (curr != nullptr)
+					{
+						try {
+							if (curr->orderID == stoi(oID)) {
+								cout << "Order ID exist, please indert other order ID" << endl;
+								validID = false;
+								break;
+							}
+						}
+						catch (...) {
+							cout << "Order ID must be integer!" << endl;
+							validID = false;
+							break;
+						}
+						curr = curr->next;
+					}
+					try {
+						tempID = stoi(oID);
+						validID = true;
+					}
+					catch (...) {
+						cout << "Order ID must be integer!" << endl;
+						validID = false;
+					}
+				} while (validID == false);
 				cout << "Buyer Name= ";
 				getline(cin, name);
 				cout << "Buyer Email= ";
 				getline(cin, email);
 				cout << "Order Date (eg. 2022/05/20)= ";
 				getline(cin, date);
-				cout << "Total= RM";
-				getline(cin, total);
+				do {
+					cout << "Total= RM";
+					getline(cin, total);
+					try {
+						tempTotal = stod(total);
+						validTotal = true;
+					}
+					catch (...) {
+						cout << "Total must be integer/double!" << endl;
+						validTotal = false;
+					}
+				} while (validTotal == false);
 				cout << "Shipping Address= ";
 				getline(cin, shipping);
-				cout << "Item ID= ";
-				getline(cin, item);
-				cout << "Quantity= ";
-				getline(cin, quantity);
+				do {
+					cout << "Item ID= ";
+					getline(cin, item);
+					try {
+						tempItem = stoi(item);
+						validItem = true;
+					}
+					catch (...) {
+						cout << "Item ID must be integer!" << endl;
+						validItem = false;
+					}
+				} while (validItem == false);
+				do {
+					cout << "Quantity= ";
+					getline(cin, quantity);
+					try {
+						tempQuantity = stoi(quantity);
+						validQuantity = true;
+					}
+					catch (...) {
+						cout << "Quantity must be integer!" << endl;
+						validQuantity = false;
+					}
+				} while (validQuantity == false);
+				
 
-				insertNew(stoi(oID), name, email, date, stod(total), shipping, stoi(item), stoi(quantity));
+				insertNew(stoi(oID), name, email, date, tempTotal, shipping, tempItem, tempQuantity);
 			}
 			showAll();
 		}
@@ -631,11 +692,11 @@ public:
 				{
 				case 1:
 				{
-					if (stoi(newData)) {
+					try {
 						curr->orderID = stoi(newData);
 					}
-					else {
-						cout << "New data is invalid";
+					catch(...) {
+						cout << "New data is invalid" << endl;
 					}
 				}
 				break;
@@ -656,11 +717,11 @@ public:
 				break;
 				case 5:
 				{
-					if (stoi(newData)) {
+					try{
 						curr->total = stod(newData);
 					}
-					else {
-						cout << "New data is invalid";
+					catch (...) {
+						cout << "New data is invalid" << endl;
 					}
 
 				}
@@ -672,21 +733,21 @@ public:
 				break;
 				case 7:
 				{
-					if (stoi(newData)) {
+					try {
 						curr->itemID = stoi(newData);
 					}
-					else {
-						cout << "New data is invalid";
+					catch (...) {
+						cout << "New data is invalid" << endl;
 					}
 				}
 				break;
 				case 8:
 				{
-					if (stoi(newData)) {
+					try {
 						curr->quantity = stoi(newData);
 					}
-					else {
-						cout << "New data is invalid";
+					catch (...) {
+						cout << "New data is invalid" << endl;
 					}
 				}
 				break;

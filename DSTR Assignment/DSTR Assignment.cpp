@@ -184,31 +184,7 @@ void runPOSystem(int role)
 			break;
 			case 4:
 			{
-				int chosenID, chosenCol = 0;
-				string newData;
-				order.showAll();
-				cout << "Provide order ID of the order that wanted to edit: ";
-				cin >> chosenID;
-				while (cin.fail()) {
-					cout << "Please input order ID only" << std::endl;
-					cin.clear();
-					cin.ignore(numeric_limits <streamsize> ::max(), '\n');
-					cin >> chosenID;
-				}
-				order.showSpecific(order.searchOrderID(chosenID));
-				cout << "Which column do you want to edit (Column number eg. 2)? ";
-				cin >> chosenCol;
-				while (cin.fail()) {
-					cout << "Please input column number only" << std::endl;
-					cin.clear();
-					cin.ignore(numeric_limits <streamsize> ::max(), '\n');
-					cin >> chosenCol;
-				}
-				cin.ignore(numeric_limits <streamsize> ::max(), '\n');
-				cout << "Insert new data: ";
-				getline(cin, newData);
-
-				order.editData(chosenID, chosenCol, newData);
+				order.editData();
 			}
 			break;
 			case 5:
@@ -264,7 +240,9 @@ void runPOSystem(int role)
 			{
 				char decision;
 				int chosenID, chosenCol = 0;
+				bool validType = true;
 				string newType;
+				int tempType;
 				order.generateReport(2);
 
 				do {
@@ -278,13 +256,37 @@ void runPOSystem(int role)
 							cout << "Please input order ID only" << std::endl;
 							cin.clear();
 							cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+							cout << "Please provide order ID: ";
 							cin >> chosenID;
 						}
 						order.searchOrderID(chosenID);
 						cin.ignore(numeric_limits <streamsize> ::max(), '\n');
-						cout << "New Type: ";
-						getline(cin, newType);
-						order.editData(chosenID, 9, newType);
+						validType = true;
+						do {
+							cout << "New Type (1: Urgent, 2: Normal): ";
+							getline(cin, newType);
+							try {
+								tempType = stoi(newType);
+								if (tempType != 1 && tempType != 2) {
+									cout << "Please input 1 or 2 only! (1: Urgent, 2: Normal)" << endl;
+									validType = false;
+								}
+								else if (tempType == 1) {
+									newType = "Urgent";
+									validType = true;
+								}
+								else if (tempType == 2) {
+									newType = "Normal";
+									validType = true;
+								}
+							}
+							catch (...) {
+								cout << "Please input 1 or 2 only! (1: Urgent, 2: Normal)" << endl;
+								validType = false;
+							}
+						} while (validType == false);
+						
+						order.updateData(chosenID, 9, newType);
 					}
 				} while (decision != 'y' && decision != 'n');
 			}
@@ -384,7 +386,6 @@ void runPOSystem(int role)
 			break;
 			case 88:
 			{
-				//show
 				order.showAll();
 				cout << endl;
 			}
@@ -410,7 +411,7 @@ void runPOSystem(int role)
 	} while (next == 'y');
 
 	cout << "\nLogging out...Thank you!" << endl;
-	cout << "============================================================" << endl << endl;;
+	cout << "============================================================" << endl << endl;
 }
 
 int main()

@@ -564,7 +564,6 @@ public:
 	void insertNewOrder()
 	{
 		int amount = 0;
-		Order* curr = head;
 		//asking for number of orders will be inserted at once
 		cout << "How many orders? " << endl;
 		if (amount = checkChoiceInt()) {
@@ -572,33 +571,36 @@ public:
 
 			for (int i = 0; i < amount; ++i)
 			{
-				bool validID = true, validItem = true, validQuantity = true, validTotal = true;
+				bool validID = true, validItem = true, validQuantity = true, validTotal = true, validType = true;
 				string oID, name, email, date, total, shipping, item, quantity;
 				double tempTotal;
 				int tempID, tempItem, tempQuantity;
 				cout << "\n--- ENTER ORDER ID #" << (i + 1) << "---" << endl << endl;
 				do {
+					Order* curr = head;
 					cout << "Order ID= ";
 					getline(cin, oID);
-					while (curr != nullptr)
-					{
-						try {
-							if (curr->orderID == stoi(oID)) {
-								cout << "Order ID exist, please indert other order ID" << endl;
+					try {
+						tempID = stoi(oID);
+						while (curr != nullptr)
+						{
+							try {
+								if (curr->orderID == stoi(oID)) {
+									cout << "Order ID exist, please insert other order ID" << endl;
+									validID = false;
+									break;
+								}
+								else {
+									validID = true;
+								}
+							}
+							catch (...) {
+								cout << "Order ID must be integer!" << endl;
 								validID = false;
 								break;
 							}
+							curr = curr->next;
 						}
-						catch (...) {
-							cout << "Order ID must be integer!" << endl;
-							validID = false;
-							break;
-						}
-						curr = curr->next;
-					}
-					try {
-						tempID = stoi(oID);
-						validID = true;
 					}
 					catch (...) {
 						cout << "Order ID must be integer!" << endl;
@@ -649,7 +651,6 @@ public:
 						validQuantity = false;
 					}
 				} while (validQuantity == false);
-				
 
 				insertNew(stoi(oID), name, email, date, tempTotal, shipping, tempItem, tempQuantity);
 			}
@@ -674,8 +675,7 @@ public:
 	}
 
 	//update order detail
-	void editData(int chosenID, int chosenCol, string newData)
-	{
+	void updateData(int chosenID, int chosenCol, string newData) {
 		Order* curr = head, * index = nullptr;
 
 		if (head == nullptr) {
@@ -695,7 +695,7 @@ public:
 					try {
 						curr->orderID = stoi(newData);
 					}
-					catch(...) {
+					catch (...) {
 						cout << "New data is invalid" << endl;
 					}
 				}
@@ -717,7 +717,7 @@ public:
 				break;
 				case 5:
 				{
-					try{
+					try {
 						curr->total = stod(newData);
 					}
 					catch (...) {
@@ -768,8 +768,48 @@ public:
 				break;
 				}
 			}
-			
+
 		}
+	}
+
+	//edit order detail
+	void editData()
+	{
+		int chosenID, chosenCol = 0;
+		string newData;
+		bool validID = true, validCol = true;
+		showAll();
+		do {
+			cout << "Provide order ID of the order that wanted to edit: ";
+			cin >> chosenID;
+			validID = true;
+			if (cin.fail()) {
+				cout << "Please input order ID only" << endl;
+				cin.clear();
+				cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+				validID = false;
+			}
+		} while (validID == false);
+		
+		showSpecific(searchOrderID(chosenID));
+		do {
+			cout << "Which column do you want to edit (Column number eg. 2)? ";
+			cin >> chosenCol;
+			validCol = true;
+			if (cin.fail()) {
+				cout << "Please input column number only" << std::endl;
+				cin.clear();
+				cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+				validCol = false;
+			}
+			cin.ignore(numeric_limits <streamsize> ::max(), '\n');
+		} while (validCol == false);
+		
+		cout << "Insert new data: ";
+		getline(cin, newData);
+
+		updateData(chosenID, chosenCol, newData);
+		
 	}
 
 	//sort by ID

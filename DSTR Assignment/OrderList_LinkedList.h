@@ -586,7 +586,7 @@ public:
 						{
 							try {
 								if (curr->orderID == stoi(oID)) {
-									cout << "Order ID exist, please indert other order ID" << endl;
+									cout << "Order ID exist, please insert other order ID" << endl;
 									validID = false;
 									break;
 								}

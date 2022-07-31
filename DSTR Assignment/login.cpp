@@ -231,7 +231,7 @@ inline void addNewUser(vector<user>& userD) {
 	cin.ignore(numeric_limits <streamsize> ::max(), '\n');
 	userD.push_back(user(id, name, email, "1234", pos));
 
-	cout << "\nNEW USER INFO vvv" << endl;
+	cout << "\nNEW USER INFO" << endl;
 	showUser(userD.back());
 	cout << "Default password for new account is '1234'" << endl;
 }

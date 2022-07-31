@@ -386,7 +386,6 @@ void runPOSystem(int role)
 			break;
 			case 88:
 			{
-				//show
 				order.showAll();
 				cout << endl;
 			}
@@ -412,7 +411,7 @@ void runPOSystem(int role)
 	} while (next == 'y');
 
 	cout << "\nLogging out...Thank you!" << endl;
-	cout << "============================================================" << endl << endl;;
+	cout << "============================================================" << endl << endl;
 }
 
 int main()

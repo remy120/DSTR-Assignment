@@ -564,7 +564,6 @@ public:
 	void insertNewOrder()
 	{
 		int amount = 0;
-		Order* curr = head;
 		//asking for number of orders will be inserted at once
 		cout << "How many orders? " << endl;
 		if (amount = checkChoiceInt()) {
@@ -572,33 +571,36 @@ public:
 
 			for (int i = 0; i < amount; ++i)
 			{
-				bool validID = true, validItem = true, validQuantity = true, validTotal = true;
+				bool validID = true, validItem = true, validQuantity = true, validTotal = true, validType = true;
 				string oID, name, email, date, total, shipping, item, quantity;
 				double tempTotal;
 				int tempID, tempItem, tempQuantity;
 				cout << "\n--- ENTER ORDER ID #" << (i + 1) << "---" << endl << endl;
 				do {
+					Order* curr = head;
 					cout << "Order ID= ";
 					getline(cin, oID);
-					while (curr != nullptr)
-					{
-						try {
-							if (curr->orderID == stoi(oID)) {
-								cout << "Order ID exist, please indert other order ID" << endl;
+					try {
+						tempID = stoi(oID);
+						while (curr != nullptr)
+						{
+							try {
+								if (curr->orderID == stoi(oID)) {
+									cout << "Order ID exist, please indert other order ID" << endl;
+									validID = false;
+									break;
+								}
+								else {
+									validID = true;
+								}
+							}
+							catch (...) {
+								cout << "Order ID must be integer!" << endl;
 								validID = false;
 								break;
 							}
+							curr = curr->next;
 						}
-						catch (...) {
-							cout << "Order ID must be integer!" << endl;
-							validID = false;
-							break;
-						}
-						curr = curr->next;
-					}
-					try {
-						tempID = stoi(oID);
-						validID = true;
 					}
 					catch (...) {
 						cout << "Order ID must be integer!" << endl;
@@ -649,7 +651,6 @@ public:
 						validQuantity = false;
 					}
 				} while (validQuantity == false);
-				
 
 				insertNew(stoi(oID), name, email, date, tempTotal, shipping, tempItem, tempQuantity);
 			}

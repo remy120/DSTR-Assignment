@@ -50,7 +50,7 @@ inline int validateUser(vector<user> userD, int& id) {
 	exit(0);
 }
 
-//show last users
+//show user
 inline void showUser(user userD) {
 	string position = "";
 	user data = userD;

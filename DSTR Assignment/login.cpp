@@ -233,5 +233,5 @@ inline void addNewUser(vector<user>& userD) {
 
 	cout << "\nNEW USER INFO vvv" << endl;
 	showUser(userD.back());
-	cout << "Default password for new account is '1234'";
+	cout << "Default password for new account is '1234'" << endl;
 }

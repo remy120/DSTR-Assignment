@@ -363,6 +363,7 @@ void runPOSystem(int role)
 			{
 				addNewUser(users);
 			}
+			break;
 			case 11:
 			{
 				delUsers(users, sessionID);

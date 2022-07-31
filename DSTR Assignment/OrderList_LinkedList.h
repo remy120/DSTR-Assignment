@@ -310,10 +310,13 @@ public:
 			while (curr != nullptr)
 			{
 				++index;
-				if (curr->orderID != id)
-					curr = curr->next;
-				else
+				if (curr->orderID == id) {
 					deleteItemAt(index);
+					break;
+				}
+				else {
+					curr = curr->next;
+				}
 			}
 		}
 	}

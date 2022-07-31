@@ -11,7 +11,7 @@
 
 using namespace std;
 
-//check if choice input is integer
+//check if choice input is integer after asking for choice
 inline int checkChoiceInt() {
 	string checkint;
 	int count=0;
@@ -163,11 +163,13 @@ public:
 		cout << "=========================================" << endl;
 	}
 
+	//display line of order
 	void displayLine(Order* curr)
 	{
 		cout << "" << curr->orderID << "	 " << curr->buyerName << "	 " << curr->orderDate << "	 RM" << setprecision(2) << fixed << curr->total << "	 " << curr->type << "	 " << curr->status << endl;
 	}
 
+	//display header
 	void displayOrderHeader() {
 		cout << "ID	|Buyer		|Order Date	|Total		|Type	|Status" << endl;
 	}
@@ -437,7 +439,7 @@ public:
 		return size;
 	}
 
-	//show linkedlist
+	//show whole order list
 	void showAll()
 	{
 		Order* curr = head;
@@ -455,8 +457,7 @@ public:
 		}
 	}
 
-	
-
+	//generate report
 	void generateReport(int statusId)
 	{
 		Order* curr = head;
@@ -485,6 +486,7 @@ public:
 			cout << "Total completed order:" << count << endl;
 		}
 
+		//pending and urgent
 		if (statusId == 2) {
 			displayOrderHeader();
 			while (curr != nullptr)
@@ -513,6 +515,7 @@ public:
 			cout << "Total pending order:" << count << endl;
 		}
 
+		//cancelled
 		if (statusId == 3) {
 			displayOrderHeader();
 			while (curr != nullptr)
@@ -529,6 +532,7 @@ public:
 			cout << "Total cancelled order:" << count << endl;
 		}
 
+		//year with completed
 		if (statusId == 4) {
 			int year;
 			cout << "Input a year (eg. 2022)";
@@ -592,7 +596,7 @@ public:
 		}
 	}
 
-	//show linkedlist
+	//show specific order
 	void showSpecific(int index)
 	{
 		if (index != -1) {
@@ -608,6 +612,7 @@ public:
 		}
 	}
 
+	//update order detail
 	void editData(int chosenID, int chosenCol, string newData)
 	{
 		Order* curr = head, * index = nullptr;
@@ -822,7 +827,7 @@ public:
 		}
 	}
 
-	//sort order based on ID ascending
+	//sort order based on ID, total, quantity (ASC,DESC)
 	void sort(int direction)
 	{
 		Order* curr = head, * index = nullptr;
@@ -893,7 +898,7 @@ public:
 		}
 	}
 
-
+	//sort by date
 	void sortDate(int direction) {
 		Order* curr = head, * index = nullptr;
 
@@ -951,7 +956,7 @@ public:
 		}
 	}
 
-
+	//sort and generate report by newest
 	void sortReportByNewest()
 	{
 		cout << "--- SORT REPORT BY NEWEST ---" << endl;
@@ -988,6 +993,7 @@ public:
 		}
 	}
 
+	//sort and generate report by oldest
 	void sortReportByOldest()
 	{
 		cout << "--- SORT REPORT BY OLDEST ---" << endl;

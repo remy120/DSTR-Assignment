@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//order structure declaration
 struct Order {
 	int orderID;
 	string buyerName;

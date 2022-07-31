@@ -64,7 +64,6 @@ class OrderList
 public:
 	Order* head;
 	int size;
-	string value[10];
 
 	OrderList()
 	{
@@ -74,6 +73,7 @@ public:
 
 public:
 
+	string value[10];
 	// length of the string  
 	//Reference from https://www.javatpoint.com/how-to-split-strings-in-cpp
 	inline int len(string str)
